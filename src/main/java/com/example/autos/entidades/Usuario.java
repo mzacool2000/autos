@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.example.autos.entidades;
 
 import javax.persistence.Entity;
@@ -23,6 +19,19 @@ public class Usuario {
     private boolean habilitado;
     
     private String clave;
+
+    public Usuario() {
+    }
+
+    public Usuario(String id, String nombre, String apellido, String email, boolean habilitado, String clave) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+        this.habilitado = habilitado;
+        this.clave = clave;
+    }
+    
 
     /**
      * @return the id
