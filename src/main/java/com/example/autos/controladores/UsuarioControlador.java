@@ -1,7 +1,7 @@
 
-package com.example.controladores;
+package com.example.autos.controladores;
 
-import com.example.servicios.UsuarioServicio;
+import com.example.autos.servicio.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
