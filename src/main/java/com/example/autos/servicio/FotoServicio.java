@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.autos.servicios;
+package com.example.autos.servicio;
 
 import com.example.autos.entidades.Foto;
 import com.example.autos.repositorios.FotoRepositorio;

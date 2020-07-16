@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.autos.repositorios;
+package com.example.autos.repositorio;
 
 import com.example.autos.entidades.Marca;
 import org.springframework.data.jpa.repository.JpaRepository;
