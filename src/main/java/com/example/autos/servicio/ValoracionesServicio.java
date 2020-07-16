@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.autos.repositorio;
+package com.example.autos.servicio;
 
-import com.example.autos.entidades.Usuario;
+
 import com.example.autos.entidades.Valoraciones;
 import org.springframework.data.jpa.repository.JpaRepository;
 
