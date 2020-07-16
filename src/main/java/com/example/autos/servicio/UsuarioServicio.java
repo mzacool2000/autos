@@ -1,15 +1,26 @@
-package com.example.servicios;
+
+package com.example.autos.servicio;
 
 import com.example.autos.entidades.Usuario;
-import com.example.repositorios.UsuarioRepositorio;
-import java.util.Optional;
+import com.example.autos.repositorio.UsuarioRepositorio;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-@Service
-public class UsuarioServicio{
 
+public class UsuarioServicio  implements UserDetailsService  {
+
+    
     @Autowired
     private UsuarioRepositorio usuarioRepo;
 
@@ -45,11 +56,9 @@ public class UsuarioServicio{
     
     
     @Transactional
-    public void eliminarUsuario(String id)throws Error{
-        Optional<Usuario> respuesta = usuarioRepo.findById(id);
-        
-        if(respuesta.isPresent()){
-        usuarioRepo.delete(respuesta.get());
+    public void eliminarUsuario(Usuario usuario)throws Error{
+        if(usuario != null){
+        usuarioRepo.delete(usuario);
         }else{
             throw new Error ("El usuario no puede ser nulo");
         }
@@ -73,6 +82,25 @@ public class UsuarioServicio{
         
     }
     
-    
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Usuario empleado = usuarioRepo.buscarPorEmail(email);
+        if (empleado != null) {
+
+            List<GrantedAuthority> permisos = new ArrayList<>();
+
+            GrantedAuthority p2 = new SimpleGrantedAuthority("MODULO_TABLERO");
+            permisos.add(p2);
+            
+            ServletRequestAttributes attr =(ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            HttpSession session = attr.getRequest().getSession(true);
+            session.setAttribute("usuario", empleado);
+            User user = new User(empleado.getEmail(), empleado.getClave(), permisos);
+            return user;
+
+        } else {
+            return null;
+        }
+    }
 
 }

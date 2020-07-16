@@ -8,7 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 
 @Entity
-class Marca {
+public class Marca {
     
         @Id
     @GeneratedValue(generator = "uuid")
