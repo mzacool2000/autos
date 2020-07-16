@@ -26,7 +26,8 @@ public class Comparaciones {
     @OneToOne
     private Vehiculo vehiculo2;
     
-    private String idGanador;
+    @OneToOne
+    private Vehiculo vehiculoganador;
     private Calendar fechaComparacion;
 
     /**
@@ -71,19 +72,7 @@ public class Comparaciones {
         this.vehiculo2 = vehiculo2;
     }
 
-    /**
-     * @return the idGanador
-     */
-    public String getIdGanador() {
-        return idGanador;
-    }
-
-    /**
-     * @param idGanador the idGanador to set
-     */
-    public void setIdGanador(String idGanador) {
-        this.idGanador = idGanador;
-    }
+ 
 
     /**
      * @return the fechaComparacion
@@ -97,6 +86,20 @@ public class Comparaciones {
      */
     public void setFechaComparacion(Calendar fechaComparacion) {
         this.fechaComparacion = fechaComparacion;
+    }
+
+    /**
+     * @return the vehiculoganador
+     */
+    public Vehiculo getVehiculoganador() {
+        return vehiculoganador;
+    }
+
+    /**
+     * @param vehiculoganador the vehiculoganador to set
+     */
+    public void setVehiculoganador(Vehiculo vehiculoganador) {
+        this.vehiculoganador = vehiculoganador;
     }
     
     
