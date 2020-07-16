@@ -1,7 +1,7 @@
 
 
 
-package com.example.autos.seguridad;
+package com.example.autos.servicio;
 
 import com.example.autos.entidades.PasswordResetToken;
 import com.example.autos.entidades.Usuario;
