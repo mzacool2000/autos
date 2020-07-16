@@ -1,11 +1,11 @@
-package com.example.autos.servicios;
+package com.example.autos.servicio;
 
 import com.example.autos.entidades.Foto;
 import com.example.autos.entidades.Marca;
 import com.example.autos.entidades.Vehiculo;
 import com.example.autos.enums.TipoCombustible;
-import com.example.autos.repositorios.MarcaRepositorio;
-import com.example.autos.repositorios.VehiculoRepositorio;
+import com.example.autos.repositorio.MarcaRepositorio;
+import com.example.autos.repositorio.VehiculoRepositorio;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
