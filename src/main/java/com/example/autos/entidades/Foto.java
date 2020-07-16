@@ -12,7 +12,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 
 @Entity
-class Foto {
+public class Foto {
     
     @Id
     @GeneratedValue(generator = "uuid")

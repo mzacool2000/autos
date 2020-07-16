@@ -5,7 +5,6 @@ import com.example.autos.entidades.Comparaciones;
 import com.example.autos.entidades.Vehiculo;
 import com.example.autos.repositorio.ComparacionesRepositorio;
 import com.example.autos.repositorio.VehiculoRepositorio;
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLBoundOperation;
 import java.util.Calendar;
 import java.util.Optional;
 import javax.transaction.Transactional;
