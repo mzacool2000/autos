@@ -3,11 +3,22 @@ package com.example.autos.seguridad;
 
 import com.example.autos.entidades.Usuario;
 import com.example.autos.repositorio.UsuarioRepositorio;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 
-public class UsuarioServicio {
+public class UsuarioServicio  implements UserDetailsService  {
 
     
     @Autowired
@@ -71,6 +82,25 @@ public class UsuarioServicio {
         
     }
     
-    
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Usuario empleado = usuarioRepo.buscarPorEmail(email);
+        if (empleado != null) {
+
+            List<GrantedAuthority> permisos = new ArrayList<>();
+
+            GrantedAuthority p2 = new SimpleGrantedAuthority("MODULO_TABLERO");
+            permisos.add(p2);
+            
+            ServletRequestAttributes attr =(ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            HttpSession session = attr.getRequest().getSession(true);
+            session.setAttribute("usuario", empleado);
+            User user = new User(empleado.getEmail(), empleado.getClave(), permisos);
+            return user;
+
+        } else {
+            return null;
+        }
+    }
 
 }
