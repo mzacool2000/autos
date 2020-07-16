@@ -19,7 +19,7 @@ public class Vehiculo {
     private String id;
         
     private String modelo;
-    @ManyToOne
+    @OneToMany
     private Marca marca;
     
     private String motor;
