@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UsuarioServicio     {
+public class UsuarioServicio{
 
     @Autowired
     private UsuarioRepositorio usuarioRepo;
@@ -45,9 +45,11 @@ public class UsuarioServicio     {
     
     
     @Transactional
-    public void eliminarUsuario(Usuario usuario)throws Error{
-        if(usuario != null){
-        usuarioRepo.delete(usuario);
+    public void eliminarUsuario(String id)throws Error{
+        Optional<Usuario> respuesta = usuarioRepo.findById(id);
+        
+        if(respuesta.isPresent()){
+        usuarioRepo.delete(respuesta.get());
         }else{
             throw new Error ("El usuario no puede ser nulo");
         }
