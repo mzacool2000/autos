@@ -5,7 +5,8 @@
  */
 package com.example.autos;
 
-import com.example.autos.seguridad.UsuarioServicio;
+
+import com.example.autos.servicio.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;

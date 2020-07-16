@@ -3,9 +3,10 @@ package com.example.autos.controladores;
 
 import com.example.autos.entidades.Usuario;
 import com.example.autos.repositorio.UsuarioRepositorio;
-import com.example.autos.seguridad.NotificacionServicio;
-import com.example.autos.seguridad.PasswordResetTokenService;
-import com.example.autos.seguridad.UsuarioServicio;
+import com.example.autos.servicio.NotificacionServicio;
+import com.example.autos.servicio.PasswordResetTokenService;
+import com.example.autos.servicio.UsuarioServicio;
+
 import java.util.Optional;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
