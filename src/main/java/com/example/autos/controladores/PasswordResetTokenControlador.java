@@ -28,35 +28,35 @@ public class PasswordResetTokenControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
     
-    @Autowired 
+    @Autowired
     private NotificacionServicio notificacionServicio;
     @Autowired
     private PasswordResetTokenService passwordResetTokenService;
-    
+
     @PostMapping("/user/resetPassword")
-public GenericResponse resetPassword(HttpServletRequest request, @RequestParam("email") String userEmail) throws Error {
-   
-    Usuario empleado = usuarioRepositorio.buscarPorEmail(userEmail);
-    if (empleado == null) {
-        throw new Error("no se encontro el email");
+    public GenericResponse resetPassword(HttpServletRequest request, @RequestParam("email") String userEmail) throws Error {
+
+        Usuario empleado = usuarioRepositorio.buscarPorEmail(userEmail);
+        if (empleado == null) {
+            throw new Error("no se encontro el email");
+        }
+        String token = UUID.randomUUID().toString();
+        passwordResetTokenService.createPasswordResetTokenForUser(empleado, token);
+        notificacionServicio.enviar(notificacionServicio.constructResetTokenEmail("http://bonosartrans.ddns.net", request.getLocale(), token, empleado));
+        return new GenericResponse("message.resetPasswordEmail");
     }
-    String token = UUID.randomUUID().toString();
-    passwordResetTokenService.createPasswordResetTokenForUser(empleado, token);
-    notificacionServicio.enviar(notificacionServicio.constructResetTokenEmail("http://bonosartrans.ddns.net",request.getLocale(), token, empleado));
-  return new GenericResponse("message.resetPasswordEmail");
-}
-    
-  @GetMapping("/user/changePassword{id}")
+
+    @GetMapping("/user/changePassword{id}")
     public String editar(ModelMap modelo, @PathVariable String id) {
-    
-    Usuario usuario = passwordResetTokenService.buscarToken(id);
-    modelo.put("usuario", usuario);
-    return "rpass.html";
+
+        Usuario usuario = passwordResetTokenService.buscarToken(id);
+        modelo.put("usuario", usuario);
+        return "rpass.html";
     }
-    
+
     @PostMapping("/rpassw")
-    public String npasword(ModelMap modelo, @RequestParam String clave, @RequestParam String clave2, @RequestParam String id){
-    
+    public String npasword(ModelMap modelo, @RequestParam String clave, @RequestParam String clave2, @RequestParam String id) {
+
         if (clave.equals(clave2)) {
             Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
             if (respuesta.isPresent()) {
@@ -69,7 +69,7 @@ public GenericResponse resetPassword(HttpServletRequest request, @RequestParam("
                 modelo.put("mensaje", "Su contraseña fue cambiada exitosamente");
 
                 return "exito.html";
-            } 
+            }
 
             modelo.put("titulo", "Algo Salio mal");
             modelo.put("error", "intente mas tarde");
@@ -82,23 +82,20 @@ public GenericResponse resetPassword(HttpServletRequest request, @RequestParam("
         return "exito.html";
     }
 
-
-
     private static class GenericResponse {
 
-  
-    private String message;
-    private String error;
- 
-    public GenericResponse(String message) {
-        super();
-        this.message = message;
-    }
- 
-    public GenericResponse(String message, String error) {
-        super();
-        this.message = message;
-        this.error = error;
-    }
+        private String message;
+        private String error;
+
+        public GenericResponse(String message) {
+            super();
+            this.message = message;
+        }
+
+        public GenericResponse(String message, String error) {
+            super();
+            this.message = message;
+            this.error = error;
         }
     }
+}
