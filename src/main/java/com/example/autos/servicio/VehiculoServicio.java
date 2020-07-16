@@ -5,6 +5,7 @@ import com.example.autos.entidades.Marca;
 import com.example.autos.entidades.Vehiculo;
 import com.example.autos.enums.TipoCombustible;
 import com.example.autos.repositorio.MarcaRepositorio;
+import com.example.autos.repositorio.UsuarioRepositorio;
 import com.example.autos.repositorio.VehiculoRepositorio;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -24,12 +25,16 @@ public class VehiculoServicio {
     @Autowired
     private FotoServicio fotoServicio;
 
-    //AGREGAR -usuarioRepositorio-
+
+
+
     @Transactional
     public void AgregarVehiculo(MultipartFile archivo, String idMarca, String modelo, String motor, TipoCombustible tipo, Integer cilindrada, Double emision, Double consumoRuta, Double consumoUrbano, Double consumoMixto, boolean habilitado) throws Error {
 
-        //AGREGAR USUARIOREPOSITORIO
+        
         validar(modelo, idMarca, motor, tipo, cilindrada, emision, consumoRuta, consumoUrbano, consumoMixto);
+        
+      
         Optional<Marca> respuestaM = marcaRepositorio.findById(idMarca);
 
         Vehiculo vehiculo = new Vehiculo();
