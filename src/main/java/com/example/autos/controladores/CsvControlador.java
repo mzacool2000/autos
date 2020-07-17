@@ -46,13 +46,13 @@ public class CsvControlador {
         ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(),
             CsvPreference.STANDARD_PREFERENCE);
 
-        String[] header = { "Title", "Description", "Author", "Publisher",
-            "isbn", "PublishedDate", "Price" };
+        String[] header = { "nombre del modelo del vehiculo1 ","marca del vehiculo1","vehiculo 2 mdelo","vehiculo 2 marca","vehiculo ganador modelo","vehiculo ganador marca"
+                ,"fecha de comparacion"};
 
         csvWriter.writeHeader(header);
 
         for (Comparaciones obj : comparacionesServicio.resultados()) {
-            csvWriter.write(obj, header);
+            csvWriter.write(obj.getArray(), header);
         }
 
       
@@ -77,13 +77,12 @@ public class CsvControlador {
         ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(),
             CsvPreference.STANDARD_PREFERENCE);
 
-        String[] header = { "Title", "Description", "Author", "Publisher",
-            "isbn", "PublishedDate", "Price" };
+        String[] header = { "Vehiculo","marca", "Opinion", "Valoracion" };
 
         csvWriter.writeHeader(header);
 
         for (Valoraciones obj : valoracionesServicio.resultados()) {
-            csvWriter.write(obj, header);
+            csvWriter.write(obj.getArray(), header);
         }
 
       
