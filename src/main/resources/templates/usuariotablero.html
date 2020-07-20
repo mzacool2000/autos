@@ -29,27 +29,10 @@
                 <img src="assets/images/logo.png" alt="logo" class="logo">
               </div>
               <p class="login-card-description" th:if="${sesion != null}" th:text=" 'Bienvenido ' + ${sesion.nombre} + ', ' + ${sesion.apellido}"></p>
-              <form action="#!" method="POST">
-
-                  <div class="form-group"  >
-                    <input type="hidden" name="nombre" id="nombre" class="form-control" />
-                    <label for="text" class="sr-only">Nombre</label>
-                  </div>
-                  <div class="form-group">
-                    <label for="text" class="sr-only">Apellido</label>
-                  </div>
-                  <div class="form-group">
-                    <label for="text" Class="sr-only">Email</label>
-                  </div>
-                  <div class="form-group">
-                    <label for="password" class="sr-only">Contraseña</label>
-                  </div>
-                  <div class="form-group">
-                    <label for="password" class="sr-only">Confirmar Contraseña</label>
-                  </div>
-                 
-                  <input name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="button" value="Editar Usuario">
-                </form>
+              <form action="/editu2" method="POST">
+                    <input type="hidden" name="id" id="id"  th:value="${sesion.id}" class="form-control" />
+                  <button name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="submit" >Editar Usuario</button>
+               </form>
                
               <br> <a href="/agregarUsuario"> <i class='fas fa-user-plus' style='font-size:20px;color:green'> Agregar Usuario</i></a>
                <br> <a href="/agregarmarca"> <i class='fa fa-industry' style='font-size:20px;color:green'> Agregar Marca</i></a>
