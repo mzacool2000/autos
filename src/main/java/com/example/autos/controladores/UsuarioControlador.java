@@ -19,7 +19,7 @@ public class UsuarioControlador {
    
     @GetMapping("/usuario")
     public String usuario(){
-        return "vista del usuario";
+        return "Registro.html";
     }
     
     @PostMapping("/login")
@@ -34,7 +34,7 @@ public class UsuarioControlador {
             modelo.put("clave", clave);
             modelo.put("habilitado", habilitado);
         }
-        return "vista de login";
+        return "Registro.html";
     }
     
 }
