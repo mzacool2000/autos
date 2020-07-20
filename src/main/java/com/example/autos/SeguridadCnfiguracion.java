@@ -43,19 +43,19 @@ public class SeguridadCnfiguracion extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/css/*", "/js/*", "/img/*").permitAll()
                 .and().formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/loginchek")
-                .usernameParameter("email")
-                .passwordParameter("clave")
-                .defaultSuccessUrl("/inicio")
-                .failureUrl("/login")
-                .permitAll()
+                    .loginPage("/login")
+                    .loginProcessingUrl("/loginchek")
+                    .usernameParameter("email")
+                    .passwordParameter("password")
+                    .defaultSuccessUrl("/tablero")
+                    .failureUrl("/login")
+                    .permitAll()
                 .and().logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
-                .permitAll()
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/")
+                    .permitAll()
                 .and().csrf()
-                .disable();
+                    .disable();
     }
     
 
