@@ -21,6 +21,11 @@ public class Marca {
     /**
      * @return the id
      */
+        
+        
+    public Marca() {
+    }
+
     public String getId() {
         return id;
     }
