@@ -13,13 +13,13 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 public class Vehiculo {
     
-     @Id
+    @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
         
     private String modelo;
-    @OneToMany
+    @OneToOne
     private Marca marca;
     
     private String motor;
@@ -37,6 +37,12 @@ public class Vehiculo {
     /**
      * @return the id
      */
+    
+    
+    
+    public Vehiculo() {
+    }
+
     public String getId() {
         return id;
     }
