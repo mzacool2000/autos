@@ -22,19 +22,26 @@ public class UsuarioControlador {
         return "vista del usuario";
     }
     
-    @PostMapping("/login")
-    public String login(ModelMap modelo, @RequestParam String nombre, @RequestParam String apellido,@RequestParam String email, @RequestParam String clave, @RequestParam Boolean habilitado ){
+    @PostMapping("/usarioadd")
+    public String login(ModelMap modelo, @RequestParam String nombre, @RequestParam String apellido,@RequestParam String email, @RequestParam String clave1,@RequestParam String clave2, @RequestParam Boolean habilitado ){
         try{
-            usuarioServicio.crearUsuario(nombre, apellido, email, clave, habilitado);
+            boolean chk = (habilitado.equals("on")) ? true : false;
+            if (clave1.equals(clave2)) {
+                
+                 usuarioServicio.crearUsuario(nombre, apellido, email, clave1, chk);
+            }
+           
         }catch(Error e){
             modelo.put("Error", e.getMessage());
             modelo.put("nombre", nombre);
             modelo.put("apellido", apellido);
             modelo.put("email", email);
-            modelo.put("clave", clave);
+            modelo.put("clave", clave1);
             modelo.put("habilitado", habilitado);
         }
-        return "vista de login";
+        modelo.put("titulo", "Cuenta creada Con exito");
+        modelo.put("mensaje", "El usuario recibira un mail pronto");
+        return "exito.html";
     }
     
 }
