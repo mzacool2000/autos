@@ -19,7 +19,7 @@ public class Vehiculo {
     private String id;
         
     private String modelo;
-    @OneToOne
+    @ManyToOne
     private Marca marca;
     
     private String motor;
@@ -34,13 +34,21 @@ public class Vehiculo {
     @OneToOne
     private Foto foto;
 
+    public Vehiculo() {
+    }
+
+    
+    
+    
+    
     /**
      * @return the id
      */
     public String getId() {
         return id;
     }
-
+    
+      
     /**
      * @param id the id to set
      */

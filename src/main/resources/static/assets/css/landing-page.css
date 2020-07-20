@@ -146,22 +146,26 @@ a:focus, a:active {
   padding: 8px;
 }
 
+.btn-auto {
+  border-color: #3ABE41;
+  color: #3ABE41;
+}
 .btn-primary {
-  border-color: #3472f7;
-  color: #3472f7;
+  border-color: #3ABE41;
+  color: #3ABE41;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
   background-color: transparent;
-  color: #1d62f0;
-  border-color: #1d62f0;
+  color: #34aa3a;
+  border-color: #34aa3a;
 }
 .btn-primary:disabled, .btn-primary[disabled], .btn-primary.disabled {
   background-color: transparent;
-  border-color: #3472f7;
+  border-color: #3ABE41;
 }
 .btn-primary.btn-fill {
   color: white;
-  background-color: #3472f7;
+  background-color: #3ABE41;
   opacity: 1;
   filter: alpha(opacity=100);
 }
@@ -173,7 +177,7 @@ a:focus, a:active {
   border-top-color: white;
 }
 .btn-primary .caret {
-  border-top-color: #3472f7;
+  border-top-color: #3ABE41;
 }
 
 .btn-success {
