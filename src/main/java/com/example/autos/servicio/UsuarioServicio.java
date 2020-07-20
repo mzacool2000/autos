@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -24,6 +25,8 @@ public class UsuarioServicio  implements UserDetailsService  {
     
     @Autowired
     private UsuarioRepositorio usuarioRepo;
+    @Autowired
+    private NotificacionServicio notificacionServicio;
 
     @Transactional
     public void crearUsuario(String nombre, String apellido, String email, String clave, boolean habilitado) throws Error {
@@ -34,9 +37,11 @@ public class UsuarioServicio  implements UserDetailsService  {
         usuario.setNombre(nombre);
         usuario.setApellido(apellido);
         usuario.setEmail(email);
-        usuario.setClave(clave);
+        String encriptada = new BCryptPasswordEncoder().encode(clave);
+        usuario.setClave(encriptada);
         usuario.setHabilitado(habilitado);
         usuarioRepo.save(usuario);
+        notificacionServicio.enviar("Felicidades creaste tu cuenta en autos", "Autos", email);
 
     }
     @Transactional
@@ -50,6 +55,7 @@ public class UsuarioServicio  implements UserDetailsService  {
             usuario.setClave(clave);
             usuario.setHabilitado(habilitado);
             usuarioRepo.save(usuario);
+            
         }else{
             throw new Error ("El usuario no puede ser nulo");
         }
@@ -85,8 +91,8 @@ public class UsuarioServicio  implements UserDetailsService  {
     
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario empleado = usuarioRepo.buscarPorEmail(email);
-        if (empleado != null) {
+        Usuario usuario = usuarioRepo.buscarPorEmail(email);
+        if (usuario != null) {
 
             List<GrantedAuthority> permisos = new ArrayList<>();
 
@@ -95,8 +101,8 @@ public class UsuarioServicio  implements UserDetailsService  {
             
             ServletRequestAttributes attr =(ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
             HttpSession session = attr.getRequest().getSession(true);
-            session.setAttribute("usuario", empleado);
-            User user = new User(empleado.getEmail(), empleado.getClave(), permisos);
+            session.setAttribute("usuario", usuario);
+            User user = new User(usuario.getEmail(), usuario.getClave(), permisos);
             return user;
 
         } else {

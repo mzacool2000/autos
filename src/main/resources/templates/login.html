@@ -25,17 +25,20 @@
                 <img src="assets/images/logo.png" alt="logo" class="logo">
               </div>
               <p class="login-card-description">Iniciar sesión</p>
-              <form action="/logincheck">
+              <form action="/loginchek" method="POST">
+
+                
                   <div class="form-group">
-                    <label for="email" class="sr-only">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Direccion de correo">
+                    <label for="text" Class="sr-only">Email</label>
+                    <input type="text" name="email" id="email" class="form-control" placeholder="Direccion de correo">
                   </div>
-                  <p th:if="${error != null}" th:text="${error}" style="color:red"></p>
-                  <div class="form-group mb-4">
-                    <label for="password" class="sr-only">Password</label>
+                  <div class="form-group">
+                    <label for="password" class="sr-only">Contraseña</label>
                     <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña">
                   </div>
-                  <input name="login" id="login" class= "btn-block btn btn-success mb-4" type="button" value="Login">
+                
+                 
+                  <button name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="submit" >Inicia Sesion</button>
                 </form>
                 <a href="/restoreP" class="forgot-password-link">
                   ¿Se te olvidó se contraseña?</a>
