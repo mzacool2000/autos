@@ -34,7 +34,9 @@ public class UsuarioControlador {
             modelo.put("clave", clave);
             modelo.put("habilitado", habilitado);
         }
-        return "Registro.html";
+        modelo.put("titulo", "cuenta creada con exito");
+        modelo.put("mensaje","El usuario recibira un mail pronto");
+        return "exito.html";
     }
     
 }
