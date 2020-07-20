@@ -2,15 +2,21 @@
 package com.example.autos.controladores;
 
 import com.example.autos.entidades.Comparaciones;
+import com.example.autos.entidades.Marca;
 import com.example.autos.entidades.Valoraciones;
+import com.example.autos.enums.TipoCombustible;
+import static com.example.autos.enums.TipoCombustible.DIESEL;
+import static com.example.autos.enums.TipoCombustible.NAFTA;
+import static com.example.autos.enums.TipoCombustible.HIBRIDO;
+import com.example.autos.repositorio.MarcaRepositorio;
+import com.example.autos.repositorio.VehiculoRepositorio;
 import com.example.autos.servicio.ComparacionesServicio;
 import com.example.autos.servicio.ValoracionesServicio;
+import com.example.autos.servicio.VehiculoServicio;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
@@ -26,7 +32,9 @@ public class CsvControlador {
     private ComparacionesServicio comparacionesServicio;
     @Autowired
     private ValoracionesServicio valoracionesServicio;
-    
+    @Autowired
+    private VehiculoServicio vehiculoServicio;
+            
     
     @RequestMapping("/comparacionesCSV")
      public void downloadCSV(HttpServletResponse response) throws IOException {
@@ -89,10 +97,7 @@ public class CsvControlador {
         csvWriter.close();
     }
      
-     @GetMapping("/tablero")
-     public String tablero(){
-     return "usuariotablero.html";
-     }
+
 }
     
 
