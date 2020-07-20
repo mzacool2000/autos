@@ -30,7 +30,7 @@ public class loginControlador {
     public String registro(ModelMap modelo, @RequestParam String email, @RequestParam String clave) throws Error{
        
         try{
-            usuarioServicio.crearUsuario(clave, email, email, clave, true);
+           
         }catch(Error e){
             modelo.put("Error", e.getMessage());
             modelo.put("email", email);
