@@ -30,8 +30,8 @@
                         <li class="active"><a href="index.html">Home</a></li>
                         <li><a href="about-us.html">Buscar Auto</a></li>
                         <li><a href="services.html">Comparar Auto</a></li>
-                        <li><a href="contact-us.html">Login</a></li>
-                        <li><a href="contact-us.html">logout</a></li>
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/logout">logout</a></li>
                     </ul>
                 </div>
         </nav>
@@ -97,6 +97,29 @@
                                 Las emisiones de CO2 para calentar el planeta también han disminuido considerablemente.
                                 Pero hay advertencias de que los niveles podrían aumentar rápidamente después de la pandemia.
                             </p>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+          <div class="section section-presentation">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="description">
+                                <h4 class="header-text">Valora tu auto</h4>
+                                <p>En esta seccion podras buscar informacion sobre tu auto y cuanto contamina </p>
+                                <form action="/valora" method="POST">
+                                    <select class="form-control" name="marcas">
+                                    <option type="text" class="form-control" th:each="vehiculo:${vehiculos}" th:value="${vehiculo.id}"
+                                    th:text=" ${vehiculo.marca.nombre} + ', ' + ${vehiculo.modelo}"></option>
+                                    </select>
+                                    <button name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="submit" >Ver datos</button>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-md-offset-1 hidden-xs">
+                            <img src="assets/img/template/mac.png"/>
                         </div>
                     </div>
                 </div>
