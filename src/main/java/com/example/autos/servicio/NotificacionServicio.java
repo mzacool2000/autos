@@ -28,7 +28,7 @@ public class NotificacionServicio {
     public void enviar(String cuerpo,String titulo, String mail){
          
         SimpleMailMessage mensaje = new SimpleMailMessage();
-        mensaje.setFrom("no-reply@artrans.com.ar");
+        mensaje.setFrom("no-reply@autos.com.ar");
         mensaje.setTo(mail);
         mensaje.setSubject(titulo);
         mensaje.setText(cuerpo);

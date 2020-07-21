@@ -1,4 +1,5 @@
 
+
 package com.example.autos.controladores;
 
 import com.example.autos.servicio.UsuarioServicio;
@@ -40,7 +41,8 @@ public class loginControlador {
         
         return "login.html";
     }
-    
+}
   
     
-}
+
+

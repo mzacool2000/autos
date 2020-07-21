@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/login.css">
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
 </head>
 <body>
@@ -26,44 +28,23 @@
               <div class="brand-wrapper">
                 <img src="assets/images/logo.png" alt="logo" class="logo">
               </div>
-              <p class="login-card-description">Bienvenido usario</p>
-              <form action="#!" method="POST">
-
-                  <div class="form-group"  >
-                    <input type="hidden" name="nombre" id="nombre" class="form-control" th:value="${usuario.id}"/>
-                    <label for="text" class="sr-only">Nombre</label>
-                  </div>
-                  <div class="form-group">
-                    <label for="text" class="sr-only">Apellido</label>
-                  </div>
-                  <div class="form-group">
-                    <label for="text" Class="sr-only">Email</label>
-                  </div>
-                  <div class="form-group">
-                    <label for="password" class="sr-only">Contraseña</label>
-                  </div>
-                  <div class="form-group">
-                    <label for="password" class="sr-only">Confirmar Contraseña</label>
-                  </div>
-                 
-                  <input name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="button" value="Editar Usuario">
-                </form>
-                <form action="#!" method="POST">
-                  <input type="hidden" name="nombre" id="nombre" class="form-control" th:value="${usuario.id}"/>
-                  <input name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="button" value="Crear Usuario" >
-                </form>
-                <form action="#!" method="POST">
-                  <input type="hidden" name="nombre" id="nombre" class="form-control" th:value="${usuario.id}"/>
-                  <input name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="button" value="Bajar Consultas" >
-                </form>
-                <form action="#!" method="POST">
-                  <input type="hidden" name="nombre" id="nombre" class="form-control" th:value="${usuario.id}"/>
-                  <input name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="button" value="Bajar Comparaciones" >
-                </form>
+              <p class="login-card-description" th:if="${sesion != null}" th:text=" 'Bienvenido ' + ${sesion.nombre} + ', ' + ${sesion.apellido}"></p>
+              <form action="/editu2" method="POST">
+                    <input type="hidden" name="id" id="id"  th:value="${sesion.id}" class="form-control" />
+                  <button name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="submit" >Editar Usuario</button>
+               </form>
+               
+              <br> <a href="/agregarUsuario"> <i class='fas fa-user-plus' style='font-size:20px;color:green'> Agregar Usuario</i></a>
+               <br> <a href="/agregarmarca"> <i class='fa fa-industry' style='font-size:20px;color:green'> Agregar Marca</i></a>
+              <br> <a href="/agregarvehiculo"> <i class='fas fa-car' style='font-size:20px;color:green'> Agregar Vehiculo</i></a>
+              <br> <a href="/valoracionesCSV"> <i class='fas fa-file-export' style='font-size:20px;color:green'> Bajar Valoraciones</i></a>
+               <br> <a href="/comparacionesCSV"> <i class='fas fa-file-export' style='font-size:20px;color:green'> Bajar Comparaciones</i></a>
                 <!-- tabla-->
-                <div class="form-group pull-right">
-                  <input type="text" class="search form-control" placeholder="¿Que Usuario busca?">
-              </div>
+                
+                <div>  
+                <br> <div class="form-group pull-right">
+                  <input href="/comparacionesCSV" type="text" class="search form-control" placeholder="¿Que Usuario busca?">
+                      </div>
               <span class="counter pull-right"></span>
               <table class="table table table-sm table-dark table-bordered results">
                 <thead>
@@ -80,18 +61,18 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr th:each="cliente:${cleintes}" onclick="seleccionar(this,th:text="${autor.id}")">
+                  <tr th:each="usuario:${usuarios}" onclick="seleccionar(this,th:text="${usuario.id}")">
                       
-                    <td  class="text-white mt-0"><a th:href="@{/editarcliente__${usuario.id}__}">Editar</a>
+                    <td  class="text-white mt-0"><a th:href="@{/editarusuario__${usuario.id}__}">Editar</a>
                     <td th:text="${usuario.nombre}" class="text-white mt-0"></td>
                     <td th:text="${usuario.apellido}" class="text-white mt-0"></td>
-                    <td th:text="${usuario.mail}" class="text-white mt-0"></td>
+                    <td th:text="${usuario.email}" class="text-white mt-0"></td>
                      
                   
                   </tr>
                 </tbody>
               </table>
-
+              </div>
               
                 <!-- tabla-->
             </div>

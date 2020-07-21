@@ -30,6 +30,14 @@ public class Marca {
         return id;
     }
 
+    public Marca( boolean habilitado,String nombre) {
+        this.nombre = nombre;
+        this.habilitado = habilitado;
+    }
+
+    public Marca() {
+    }
+    
     /**
      * @param id the id to set
      */
