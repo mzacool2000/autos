@@ -24,35 +24,38 @@
                 <img src="assets/images/logo.png" alt="logo" class="logo">
               </div>
               <p class="login-card-description">Editar usario</p>
-              <form action="#!" method="POST">
+              <form action="/usarioedit" method="POST">
 
                   <div class="form-group"  >
-                    <input type="hidden" name="nombre" id="nombre" class="form-control" th:value="${usuario.id}"/>
+                    <input type="hidden" name="id" id="id" class="form-control" th:value="${usuario.id}"/>
                     <label for="text" class="sr-only">Nombre</label>
                     <input type="text" name="nombre" id="nombre" class="form-control" th:value="${usuario.nombre}"/>
                   </div>
                   <div class="form-group">
                     <label for="text" class="sr-only">Apellido</label>
-                    <input type="text" name="aellido" id="email" class="form-control" th:value="${usuario.apellido}"/>
+                    <input type="text" name="apellido"  class="form-control" th:value="${usuario.apellido}"/>
                   </div>
                   <div class="form-group">
-                    <label for="text" Class="sr-only">Email</label>
-                    <input type="text" name="email" id="email" class="form-control" th:value="${usuario.mail}"/">
+                    <label for="text" class="sr-only">Apellido</label>
+                    <input type="mail" name="email"  class="form-control" th:value="${usuario.email}"/>
                   </div>
+                 
                   <div class="form-group">
                     <label for="password" class="sr-only">Contraseña</label>
-                    <input type="password" name="password" id="password" class="form-control" value="sincambio">
+                    <input type="password" name="clave1"  class="form-control" value="sincambio">
                   </div>
                   <div class="form-group">
                     <label for="password" class="sr-only">Confirmar Contraseña</label>
-                    <input type="password" name="passwordl" id="password" class="form-control" value="sincambio"/>
+                    <input type="password" name="clave2" class="form-control" value="sincambio"/>
                   </div>
+                  <label>Habilitado</label>
+                    <input type="checkbox" name="habilitado" id="email"  th:value="${usuario.habilitado}" class="checkbox" />
                  
-                  <input name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="button" value="Guardar Cambios">
+                  <button name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="submit" >Editar usuario</button>
                 </form>
-                <form action="#!" method="POST">
+                <form action="/eliminaru" method="POST">
                   <input type="hidden" name="nombre" id="nombre" class="form-control" th:value="${usuario.id}"/>
-                  <input name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="button" value="Eliminar Cuenta" >
+                  <button name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="submit" >Eliminar Usuario</button>
                 </form>
               
             </div>
