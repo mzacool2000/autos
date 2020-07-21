@@ -49,12 +49,12 @@
                     <input type="password" name="clave2" class="form-control" value="sincambio"/>
                   </div>
                   <label>Habilitado</label>
-                    <input type="checkbox" name="habilitado" id="email"  th:value="${usuario.habilitado}" class="checkbox" />
+                    <input type="checkbox" name="habilitado" id="habilitado" th:checked="${usuario.habilitado} == true ? 'checked'" class="checkbox" />
                  
                   <button name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="submit" >Editar usuario</button>
                 </form>
                 <form action="/eliminaru" method="POST">
-                  <input type="hidden" name="nombre" id="nombre" class="form-control" th:value="${usuario.id}"/>
+                  <input type="hidden" name="id" id="id" class="form-control" th:value="${usuario.id}"/>
                   <button name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="submit" >Eliminar Usuario</button>
                 </form>
               
