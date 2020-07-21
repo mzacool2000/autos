@@ -25,6 +25,9 @@
               </div>
               <p class="login-card-description">Registro Persona</p>
               <form action="#!">
+                  
+               <p th:if="${error != null}" th:text="${error}" style="color:red"></p>
+
 
                   <div class="form-group">
                     <label for="text" class="sr-only">Nombre</label>

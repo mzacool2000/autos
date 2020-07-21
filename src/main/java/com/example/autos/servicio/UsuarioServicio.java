@@ -1,6 +1,7 @@
 
 package com.example.autos.servicio;
 
+import com.example.autos.entidades.Foto;
 import com.example.autos.entidades.Usuario;
 import com.example.autos.repositorio.UsuarioRepositorio;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class UsuarioServicio  implements UserDetailsService  {
@@ -26,7 +28,7 @@ public class UsuarioServicio  implements UserDetailsService  {
     private UsuarioRepositorio usuarioRepo;
 
     @Transactional
-    public void crearUsuario(String nombre, String apellido, String email, String clave, boolean habilitado) throws Error {
+    public void crearUsuario(MultipartFile archivo,String nombre, String apellido, String email, String clave, boolean habilitado) throws Error {
         
         validar( nombre, apellido, email, clave);
         
@@ -37,7 +39,11 @@ public class UsuarioServicio  implements UserDetailsService  {
         usuario.setClave(clave);
         usuario.setHabilitado(habilitado);
         usuarioRepo.save(usuario);
-
+        
+        Foto foto = FotoServicio.guardar(archivo);
+          usuario.setFoto(foto);
+          
+          UsuarioRepositorio.save(usuario);
     }
     @Transactional
     public void modificarUsuario(Usuario usuario, String nombre, String apellido, String email, String clave, boolean habilitado) throws Error {
@@ -102,6 +108,10 @@ public class UsuarioServicio  implements UserDetailsService  {
         } else {
             return null;
         }
+    }
+
+    public void crearUsuario(Object object, String nombre, String apellido, String email, String clave, boolean habilitado) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

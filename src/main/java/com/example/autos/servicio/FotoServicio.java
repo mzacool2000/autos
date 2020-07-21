@@ -17,15 +17,15 @@ public class FotoServicio {
     @Autowired
     private FotoRepositorio fotoRepositorio;
     
-    @Transactional
+        @Transactional
     public Foto guardar(MultipartFile archivo) throws Error {
-        if (archivo == null) {
+        if (archivo != null) {
             try {
 
                 Foto foto = new Foto();
                 foto.setMime(archivo.getContentType());
                 foto.setNombre(archivo.getName());
-                foto.setContenido(archivo.getBytes());
+                foto.setContenido(archivo.getBytes()); 
 
                 return fotoRepositorio.save(foto);
             } catch (Exception e) {
@@ -35,5 +35,36 @@ public class FotoServicio {
         }
         return null;
 
+    }
+    
+    
+    public Foto actualizar(String idFoto,MultipartFile archivo)throws Error{
+        
+         if (archivo != null) {
+            try {
+
+                Foto foto = new Foto ();
+                if (idFoto != null){
+                
+                
+                
+                Foto foto = new Foto();
+                foto.setMime(archivo.getContentType());
+                foto.setNombre(archivo.getName());
+                foto.setContenido(archivo.getBytes()); 
+
+                return fotoRepositorio.save(foto);
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+
+        }
+        return null; 
+        
+        
+        
+        
+        
+        
     }
 }
