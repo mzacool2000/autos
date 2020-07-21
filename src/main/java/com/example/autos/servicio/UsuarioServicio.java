@@ -1,12 +1,13 @@
-
 package com.example.autos.servicio;
 
 import com.example.autos.entidades.Usuario;
 import com.example.autos.repositorio.UsuarioRepositorio;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import net.bytebuddy.dynamic.DynamicType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +15,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -24,6 +26,8 @@ public class UsuarioServicio  implements UserDetailsService  {
     
     @Autowired
     private UsuarioRepositorio usuarioRepo;
+    @Autowired
+    private NotificacionServicio notificacionServicio;
 
     @Transactional
     public void crearUsuario(String nombre, String apellido, String email, String clave, boolean habilitado) throws Error {
@@ -34,27 +38,33 @@ public class UsuarioServicio  implements UserDetailsService  {
         usuario.setNombre(nombre);
         usuario.setApellido(apellido);
         usuario.setEmail(email);
-        usuario.setClave(clave);
+        String encriptada = new BCryptPasswordEncoder().encode(clave);
+        usuario.setClave(encriptada);
         usuario.setHabilitado(habilitado);
         usuarioRepo.save(usuario);
+        notificacionServicio.enviar("Felicidades creaste tu cuenta en autos", "Autos", email);
 
     }
     @Transactional
-    public void modificarUsuario(Usuario usuario, String nombre, String apellido, String email, String clave, boolean habilitado) throws Error {
+    public void modificarUsuario(String id, String nombre, String apellido, String email, String clave, boolean habilitado) throws Error {
         
         validar( nombre, apellido, email, clave);
-        if(usuario != null){
+        Optional<Usuario> respuesta = usuarioRepo.findById(id);
+        if (respuesta.isPresent()) {
+            Usuario usuario = respuesta.get();
             usuario.setNombre(nombre);
             usuario.setApellido(apellido);
             usuario.setEmail(email);
-            usuario.setClave(clave);
+            String encriptada = new BCryptPasswordEncoder().encode(clave);
+            usuario.setClave(encriptada);
             usuario.setHabilitado(habilitado);
             usuarioRepo.save(usuario);
+            
         }else{
             throw new Error ("El usuario no puede ser nulo");
         }
-    }
     
+    }
     
     @Transactional
     public void eliminarUsuario(Usuario usuario)throws Error{
@@ -85,8 +95,8 @@ public class UsuarioServicio  implements UserDetailsService  {
     
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario empleado = usuarioRepo.buscarPorEmail(email);
-        if (empleado != null) {
+        Usuario usuario = usuarioRepo.buscarPorEmail(email);
+        if (usuario != null) {
 
             List<GrantedAuthority> permisos = new ArrayList<>();
 
@@ -95,8 +105,8 @@ public class UsuarioServicio  implements UserDetailsService  {
             
             ServletRequestAttributes attr =(ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
             HttpSession session = attr.getRequest().getSession(true);
-            session.setAttribute("usuario", empleado);
-            User user = new User(empleado.getEmail(), empleado.getClave(), permisos);
+            session.setAttribute("usuario", usuario);
+            User user = new User(usuario.getEmail(), usuario.getClave(), permisos);
             return user;
 
         } else {
