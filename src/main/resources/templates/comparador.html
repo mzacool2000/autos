@@ -18,11 +18,12 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="/estilo.css">
+<link rel="stylesheet" href="assets/css/login.css">
+<link rel="stylesheet" href="EstilosTarjeta.css">
 </head>
 <body>
     <div class="container">
-        <h2 class="display-4">Comparar Auto</h2>
+        <h2 class="display-4"></h2>
         <div class="row">
             <div class="col-6">
                 <div class="wrap">
@@ -30,8 +31,8 @@
                         <div class="tarjeta">
                             <div class="frontal card1"></div>
                             <div class="trasera">
-                                 <p class="marca1"> </p>
-                                <p class="modelo1"> </p>
+                                 <div class="marca1"> </div>
+                                <div class="modelo1"> </div>
                             </div>
                         </div>
                     </div>
@@ -44,8 +45,8 @@
                         <div class="tarjeta">
                             <div class="frontal card2"></div>
                             <div class="trasera">
-                                <p class="marca2"> </p>
-                                <p class="modelo2"> </p>
+                                <div class="marca2"> </div>
+                                <div class="modelo2"> </div>
                             </div>
                         </div>
                     </div>
@@ -64,68 +65,74 @@
         <h2 class="display-4">Comparar Auto</h2>
         <div class="row">
             <div class="col-4">
-
-                <form method="POST" action="/comparar" enctype="multipart/form-data">
-                    <p class="marca1">Vehiculo_1</p>
-                    <div class="form-group">
-                        <label>Marca</label>
-                        <select th:field="*{marca}" class="form-control">
-                            <option value="-1">---</option>
-                            <option th:each="vehiculo1 : ${marca}"
-                                    th:value="${vehiculo.id}"
-                                    th:text="${vehiculo.marca}">
-                                modelo
-                            </option>
-                        </select> 
-                    </div>
-                </form>
-
-                <form method="POST" action="/comparar" enctype="multipart/form-data">
-                    <p class="modelo1">Vehiculo_1</p>
-                    <div class="form-group">
-                        <label>Modelo</label>
-                        <select th:field="*{modelo}" class="form-control">
-                            <option value="-1">---</option>
-                            <option th:each="vehiculo1 : ${modelo}"
-                                    th:value="${vehiculo.id}"
-                                    th:text="${vehiculo.modelo}">
-                                modelo
-                            </option>
-                        </select> 
-                    </div>
-                </form>
+                <div class="marca1">
+                    <form method="POST" action="/comparar" enctype="multipart/form-data">
+                        <p class="">Vehiculo_1</p>
+                        <div class="form-group">
+                            <label>Marca</label>
+                            <select th:field="*{marca}" class="form-control">
+                                <option value="-1">---</option>
+                                <option th:each="vehiculo1 : ${marca}"
+                                        th:value="${vehiculo.id}"
+                                        th:text="${vehiculo.marca}">
+                                    
+                                </option>
+                            </select> 
+                        </div>
+                    </form>
+                </div>
+                <div class="modelo1">
+                    <form method="POST" action="/comparar" enctype="multipart/form-data">
+                        <p class=""></p>
+                        <div class="form-group">
+                            <label>Modelo</label>
+                            <select th:field="*{modelo}" class="form-control">
+                                <option value="-1">---</option>
+                                <option th:each="vehiculo1 : ${modelo}"
+                                        th:value="${vehiculo.id}"
+                                        th:text="${vehiculo.modelo}">
+                                    
+                                </option>
+                            </select> 
+                        </div>
+                    </form>
+                </div>
             </div>
             <div class="col-2">
             </div>
             <div class="col-4">
-                <form method="POST" action="/comparar" enctype="multipart/form-data">
-                    <p class="marca2">Vehiculo_2</p>
-                    <div class="form-group">
-                        <label>Marca</label>
-                        <select th:field="*{marca" class="form-control">
-                            <option value="-1">---</option>
-                            <option th:each="vehiculo2 : ${marca}"
-                                    th:value="${vehiculo.id}"
-                                    th:text="${vehiculo.marca}">
-                                modelo
-                            </option>
-                        </select> 
-                    </div>
-                </form>
-                <form method="POST" action="/comparar" enctype="multipart/form-data">
-                    <p class="modelo2"> Vehiculo_2 </p>
-                    <div class="form-group">
-                        <label>Modelo</label>
-                        <select th:field="*{modelo}" class="form-control">
-                            <option value="-1">---</option>
-                            <option th:each="vehiculo2 : ${modelo}"
-                                    th:value="${vehiculo.id}"
-                                    th:text="${vehiculo.modelo}">
-                                modelo
-                            </option>
-                        </select> 
-                    </div>
-                </form>
+                <div class="marca2">
+                    <form method="POST" action="/comparar" enctype="multipart/form-data">
+                        <p class="">Vehiculo_2</p>
+                        <div class="form-group">
+                            <label>Marca</label>
+                            <select th:field="*{marca}" class="form-control">
+                                <option value="-1">---</option>
+                                <option th:each="vehiculo2 : ${marca}"
+                                        th:value="${vehiculo.id}"
+                                        th:text="${vehiculo.marca}">
+                                    
+                                </option>
+                            </select> 
+                        </div>
+                    </form>
+                </div>  
+                <div class="modelo2">
+                    <form method="POST" action="/comparar" enctype="multipart/form-data">
+                        <p class="">  </p>
+                        <div class="form-group">
+                            <label>Modelo</label>
+                            <select th:field="*{modelo}" class="form-control">
+                                <option value="-1">---</option>
+                                <option th:each="vehiculo2 : ${modelo}"
+                                        th:value="${vehiculo.id}"
+                                        th:text="${vehiculo.modelo}">
+                                    
+                                </option>
+                            </select> 
+                        </div>
+                    </form>
+                </div>
             </div> 
         </div>
 </body>
