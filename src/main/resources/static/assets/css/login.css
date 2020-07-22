@@ -77,5 +77,24 @@ body {
   .login-card-footer-nav a {
     font-size: 14px;
     color: #919aa3; }
+  
+  body{
+  padding:20px 20px;
+}
+
+.results tr[visible='false'],
+.no-result{
+  display:none;
+}
+
+.results tr[visible='true']{
+  display:table-row;
+}
+
+.counter{
+  padding:8px; 
+  color:#ccc;
+}
+  
 
 /*# sourceMappingURL=login.css.map */
