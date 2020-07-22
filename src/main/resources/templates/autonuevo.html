@@ -34,62 +34,60 @@
               <div class="brand-wrapper">
                 <img src="assets/images/logo.png" alt="logo" class="logo">
               </div>
-              <p class="login-card-description">Crear Vehiculo</p>
+              <p class="login-card-description" th:text = "${vehiculoEd} == null ? 'Crear Vehiculo' : 'Editar Vehiculo' "></p>
               <form action="#!" method="POST">
 
                   <div class="form-group"  >
+                      <input type= "hidden"  name="id"  th:value="${vehiculoEd} == null ? null : ${vehiculoEd.id}" />  
                     <label for="text" class="form-group" >Modelo</label>
-                    <input type="text" name="modelo" id="modelo" class="form-control" />
+                    <input type="text" name="modelo"  class="form-control"  th:value="${vehiculoEd} == null ? null : ${vehiculoEd.modelo}"/>
                   </div>
                   <label><p class="form-group" >Marca</p></label>
                   <select class="form-control" name="marcas">
                       <option type="text" class="form-control" th:each="marca:${marcas}" th:value="${marca.id}"
-                              th:text="${marca.nombre}"></option>
+                              th:text="${marca.nombre}" th:selected="${vehiculoEd} != null  ? ${marca.nombre} == ${vehiculoEd.marca.nombre}"></option>
                   </select>  
                   
                     <label for="text" Class="form-group">Motor</label>
-                    <input type="text" name="motor"  class="form-control"/>
+                    <input type="text" name="motor"  class="form-control"  th:value="${vehiculoEd} == null ? null : ${vehiculoEd.motor}"/>
                   
                   
 
                  
                     <label for="text" class="form-group">Cilindrada</label>
-                    <input type="number" name="Cilindrada" id="Cilindrada" class="form-control" >
+                    <input type="number" name="cilindrada" class="form-control"  th:value="${vehiculoEd} == null ? null : ${vehiculoEd.cilindrada}" >
                 
                  
                     <label for="text" class="form-group">Emision</label>
-                    <input type="number" name="emision"  class="form-control" />
+                    <input type="number" name="emision"  class="form-control"  th:value="${vehiculoEd} == null ? null : ${vehiculoEd.emision}" />
                  
                  
                     <label for="text" class="form-group">Consumo en ruta</label>
-                    <input type="number" name="consumoRuta"  class="form-control" />
+                    <input type="number" name="consumoRuta"  class="form-control"  th:value="${vehiculoEd} == null ? null : ${vehiculoEd.consumoRuta}" />
                  
                   
                     <label for="text" class="form-group">Consumo en Ciudad</label>
-                    <input type="number" name="consumoCiudad" class="form-control" />
+                    <input type="number" name="consumoCiudad" class="form-control"  th:value="${vehiculoEd} == null ? null : ${vehiculoEd.consumoUrbano}" />
                   
                
                 
                     <label for="text" class="form-group">Consumo Mixto</label>
-                    <input type="number" name="consumoMixto"  class="form-control" />
+                    <input type="number" name="consumoMixto"  class="form-control"  th:value="${vehiculoEd} == null ? null : ${vehiculoEd.consumoMixto}" />
                 
                  
                     <label for="text" class="form-group">Consumo en ruta</label>
-                    <input type="number" name="consumoRuta" class="form-control" />
+                    <input type="number" name="consumoRuta" class="form-control"  th:value="${vehiculoEd} == null ? null : ${vehiculoEd.consumoRuta}" />
                 
                   <label for="text" class="form-group">Tipo de Combustible</label>
-                  <select class="form-group" name="select">
-                    <option class="form-group" tipe="number" value="value1">Nafta</option> 
-                    <option class="form-group" tipe="number" value="value2" >Disel</option>
-                    <option class="form-group" tipe="number" value="value3">Electrico</option>
-                    <option class="form-group" tipe="number" value="value3">Hibrido</option>
-                    <option class="form-group" tipe="number" value="value3">GNC</option>
+                  <select name="color">
+                      <option th:each="combustibleOpt : ${T(com.example.autos.enums.TipoCombustible).values()}" 
+                              th:value="${combustibleOpt}" th:text="${combustibleOpt}" th:selected="${vehiculoEd} != null  ? ${combustibleOpt} == ${vehiculoEd.tipo}"></option>
                   </select>
                   <input class="form-group" type="file" name="imagen">
 
                   <label>Habilitado</label>
-                  <input type="checkbox" name="habilitado" class="checkbox" />  
-                 <button name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="submit" >Agregar Vehiculo</button>
+                  <input type="checkbox" name="habilitado" id="habilitado" th:checked="${vehiculoEd} != null and ${vehiculoEd.habilitado} == true ? 'checked'" class="checkbox" />
+                 <button name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="submit" th:text="${vehiculoEd} == null ? 'Agregar Vehiculo' : 'Editar Vehiculo'"></button>
                 </form>
                 <header class="masthead">
                   <div class="container h-100">
@@ -107,7 +105,7 @@
                             
 
     <div class="form-group pull-right">
-      <input type="text" class="search form-control" placeholder="What you looking for?">
+      <input type="text" class="search form-control" placeholder="¿que vehiculo busca?">
   </div>
   <span class="counter pull-right"></span>
   <table class="table table table-sm table-dark table-bordered results">
