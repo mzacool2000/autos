@@ -141,6 +141,7 @@
                                 <h4 class="header-text">Valora tu auto</h4>
                                 <p>En esta seccion podras buscar informacion sobre tu auto y cuanto contamina </p>
                                 <form action="/valora" method="POST">
+                                    
                                     <select class="form-control" name="marcas">
                                     <option type="text" class="form-control" th:each="vehiculo:${vehiculos}" th:value="${vehiculo.id}"
                                     th:text=" ${vehiculo.marca.nombre} + ', ' + ${vehiculo.modelo}"></option>
@@ -148,6 +149,32 @@
                                     <button name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="submit" >Ver datos</button>
                                     
                                 </form>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-md-offset-1 hidden-xs">
+                            <img src="assets/img/template/mac.png"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                     <div class="section section-presentation">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="description">
+                                <h4 class="header-text">Comprara vehiculos</h4>
+                                <p>En esta seccion podras comparar entre dos modelos de vehiculos </p>
+                                
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        
+                                        <li  class="dropdown-submenu"th:each="marca:${marcas}" >
+                                            <a th:value="${marca.nombre}" th:text="${marca.nombre}"></a>
+                                           
+                                        </li>
+                                    </ul>
+                                    <button name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="submit" >Ver datos</button>
+                                    
+                               
                             </div>
                         </div>
                         <div class="col-md-5 col-md-offset-1 hidden-xs">

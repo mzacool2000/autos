@@ -2,17 +2,14 @@
 package com.example.autos.controladores;
 
 import com.example.autos.entidades.Vehiculo;
-import com.example.autos.enums.TipoCombustible;
 import com.example.autos.repositorio.MarcaRepositorio;
 import com.example.autos.repositorio.VehiculoRepositorio;
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLBoundOperation;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class VehiculoControlador {
