@@ -68,6 +68,4 @@ public class Valoraciones {
         String[] datos = {vehiculo.getModelo(), vehiculo.getMarca().getNombre(),opinion};
         return datos;
    }
-   
-   }
- 
+}
