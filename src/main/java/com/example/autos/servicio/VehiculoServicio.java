@@ -52,7 +52,7 @@ public class VehiculoServicio {
     }
 
     @Transactional
-    public void modificar(MultipartFile archivo, String id, String idMarca, String modelo, String motor, TipoCombustible tipo, Integer cilindrada, Double emision, Double consumoRuta, Double consumoUrbano, Double consumoMixto) throws Error {
+    public void modificar(MultipartFile archivo, String id, String idMarca, String modelo, String motor, TipoCombustible tipo, Integer cilindrada, Double emision, Double consumoRuta, Double consumoUrbano, Double consumoMixto, boolean habilitado) throws Error {
         if (id.isEmpty() || id == null) {
            throw new Error("El Id del vehiculo no puede ser nulo."); 
         }
@@ -86,7 +86,9 @@ public class VehiculoServicio {
                 vehiculo.setModelo(modelo);
                 vehiculo.setMotor(motor);
                 vehiculo.setTipo(tipo);
-                
+
+                vehiculo.setHabilitado(habilitado);
+                vehiculoRepositorio.save(vehiculo);
             } else {
                 throw new Error("No se ha encotrado la marca");
             }
