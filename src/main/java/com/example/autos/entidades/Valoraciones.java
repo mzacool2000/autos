@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.example.autos.entidades;
 
 import com.example.autos.enums.ValoracionesEnums;
@@ -66,10 +62,10 @@ public class Valoraciones {
     public void setOpinion(String opinion) {
         this.opinion = opinion;
     }
-        public String[] getArray() {
+    
+   public String[] getArray() {
 
         String[] datos = {vehiculo.getModelo(), vehiculo.getMarca().getNombre(),opinion};
         return datos;
-    }
-    
+   }
 }
