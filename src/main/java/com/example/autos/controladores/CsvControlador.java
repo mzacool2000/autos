@@ -4,7 +4,7 @@ package com.example.autos.controladores;
 import com.example.autos.entidades.Comparaciones;
 import com.example.autos.entidades.Valoraciones;
 import com.example.autos.servicio.ComparacionesServicio;
-
+import com.example.autos.servicio.ValoracionesServicio;
 import com.example.autos.servicio.VehiculoServicio;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
@@ -19,14 +19,12 @@ import org.supercsv.prefs.CsvPreference;
 
 
 
-
 @Controller
 public class CsvControlador {
     @Autowired
     private ComparacionesServicio comparacionesServicio;
     @Autowired
-    private valoracionesServicio
-    
+    private ValoracionesServicio valoracionesServicio;
     @Autowired
     private VehiculoServicio vehiculoServicio;
             
