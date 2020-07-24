@@ -30,9 +30,9 @@ public class UsuarioControlador {
     }
     
     @PostMapping("/usarioadd")
-    public String login(ModelMap modelo, @RequestParam String nombre, @RequestParam String apellido,@RequestParam String email, @RequestParam String clave1,@RequestParam String clave2, @RequestParam Boolean habilitado ){
+    public String login(ModelMap modelo, @RequestParam String nombre, @RequestParam String apellido,@RequestParam String email, @RequestParam String clave1,@RequestParam String clave2, @RequestParam(required = false) String habilitado ){
         try{
-            boolean chk = (habilitado.equals("on")) ? true : false;
+            boolean chk = !(habilitado == null);
             if (clave1.equals(clave2)) {
                 
                  usuarioServicio.crearUsuario(nombre, apellido, email, clave1, chk);
@@ -53,9 +53,9 @@ public class UsuarioControlador {
     
     
     @PostMapping("/usarioedit")
-    public String editar(ModelMap modelo, @RequestParam String id,@RequestParam String nombre, @RequestParam String apellido,@RequestParam String email, @RequestParam String clave1,@RequestParam String clave2, @RequestParam Boolean habilitado ){
+    public String editar(ModelMap modelo, @RequestParam String id,@RequestParam String nombre, @RequestParam String apellido,@RequestParam String email, @RequestParam String clave1,@RequestParam String clave2, @RequestParam(required = false) String habilitado ){
         try{
-            boolean chk = (habilitado.equals("on"));
+            boolean chk = !(habilitado == null);
             if (clave1.equals(clave2)) {
                 
                  usuarioServicio.modificarUsuario(id, nombre, apellido, email, clave2, chk);
@@ -105,6 +105,21 @@ public class UsuarioControlador {
             return "usuariotablero.html";
         }
         
+    }
+    @PostMapping("/eliminaru")
+    public String eliminaru(ModelMap modelo, @RequestParam String id){
+    
+        try {
+             usuarioServicio.eliminarUsuario(id);
+        } catch (Exception e) {
+            modelo.put("error", "no se pudo  borrar el usuario");
+         return "exito.html";
+        }
+        
+        modelo.put("titulo", "Exito");  
+        modelo.put("mensaje", "El usuario fue eliminado");  
+          
+    return "exito.html"; 
     }
     
     

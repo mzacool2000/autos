@@ -2,14 +2,7 @@
 package com.example.autos.controladores;
 
 import com.example.autos.entidades.Comparaciones;
-import com.example.autos.entidades.Marca;
 import com.example.autos.entidades.Valoraciones;
-import com.example.autos.enums.TipoCombustible;
-import static com.example.autos.enums.TipoCombustible.DIESEL;
-import static com.example.autos.enums.TipoCombustible.NAFTA;
-import static com.example.autos.enums.TipoCombustible.HIBRIDO;
-import com.example.autos.repositorio.MarcaRepositorio;
-import com.example.autos.repositorio.VehiculoRepositorio;
 import com.example.autos.servicio.ComparacionesServicio;
 import com.example.autos.servicio.ValoracionesServicio;
 import com.example.autos.servicio.VehiculoServicio;
@@ -60,7 +53,7 @@ public class CsvControlador {
         csvWriter.writeHeader(header);
 
         for (Comparaciones obj : comparacionesServicio.resultados()) {
-            csvWriter.write(obj.getArray(), header);
+            csvWriter.write(obj.getArray());
         }
 
       
@@ -85,12 +78,12 @@ public class CsvControlador {
         ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(),
             CsvPreference.STANDARD_PREFERENCE);
 
-        String[] header = { "Vehiculo","marca", "Opinion", "Valoracion" };
+        String[] header = { "Vehiculo","marca", "Opinion" };
 
         csvWriter.writeHeader(header);
 
         for (Valoraciones obj : valoracionesServicio.resultados()) {
-            csvWriter.write(obj.getArray(), header);
+            csvWriter.write(obj.getArray());
         }
 
       
