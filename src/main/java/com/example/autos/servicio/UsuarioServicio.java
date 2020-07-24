@@ -1,7 +1,6 @@
 
 package com.example.autos.servicio;
 
-import com.example.autos.entidades.Foto;
 import com.example.autos.entidades.Usuario;
 import com.example.autos.repositorio.UsuarioRepositorio;
 import java.util.ArrayList;
@@ -9,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import net.bytebuddy.dynamic.DynamicType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,7 +20,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class UsuarioServicio  implements UserDetailsService  {
@@ -28,16 +27,11 @@ public class UsuarioServicio  implements UserDetailsService  {
     
     @Autowired
     private UsuarioRepositorio usuarioRepo;
-    
     @Autowired
     private NotificacionServicio notificacionServicio;
-    private MultipartFile archivo;
-    
-@Autowired
-private FotoServicio fotoServicio;
 
     @Transactional
-    public void crearUsuario(MultipartFile archivo,String nombre, String apellido, String email, String clave, boolean habilitado) throws Error {
+    public void crearUsuario(String nombre, String apellido, String email, String clave, boolean habilitado) throws Error {
         
         validar( nombre, apellido, email, clave);
         
@@ -51,12 +45,9 @@ private FotoServicio fotoServicio;
         usuarioRepo.save(usuario);
         notificacionServicio.enviar("Felicidades creaste tu cuenta en autos", "Autos", email);
 
-     Foto foto = fotoServicio.guardar(archivo);
-     usuario.setFoto(foto);
     }
-     
     @Transactional
-    public void modificarUsuario(MultipartFile archivo,String id, String nombre, String apellido, String email, String clave, boolean habilitado) throws Error {
+    public void modificarUsuario(String id, String nombre, String apellido, String email, String clave, boolean habilitado) throws Error {
         
         validar( nombre, apellido, email, clave);
         Optional<Usuario> respuesta = usuarioRepo.findById(id);
@@ -68,13 +59,6 @@ private FotoServicio fotoServicio;
             String encriptada = new BCryptPasswordEncoder().encode(clave);
             usuario.setClave(encriptada);
             usuario.setHabilitado(habilitado);
-            
-            String idFoto = null;
-            if(usuario.getFoto() != null){
-            idFoto = usuario.getFoto().getId();
-            }
-            Foto foto = fotoServicio.actualizar(idFoto,archivo);
-            usuario.setFoto(foto);
             usuarioRepo.save(usuario);
             
         }else{
@@ -132,14 +116,6 @@ private FotoServicio fotoServicio;
         } else {
             return null;
         }
-    }
-
-    public void modificarUsuario(String id, String nombre, String apellido, String email, String clave2, boolean chk) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void crearUsuario(String nombre, String apellido, String email, String clave1, boolean chk) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

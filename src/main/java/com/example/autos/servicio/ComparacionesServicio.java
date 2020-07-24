@@ -5,7 +5,9 @@ import com.example.autos.entidades.Comparaciones;
 import com.example.autos.entidades.Vehiculo;
 import com.example.autos.repositorio.ComparacionesRepositorio;
 import com.example.autos.repositorio.VehiculoRepositorio;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +45,12 @@ public class ComparacionesServicio {
             throw new Error("El id esta vacio");
         }
     }
-
-    public Iterable<Comparaciones> resultados() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public List<Comparaciones> resultados() throws Error{
+         
+      List<Comparaciones> comparaciones = new ArrayList<>();
+      comparaciones =  ComparacionesRepositorio.findAll();
+        
+     return comparaciones;   
     }
 }
