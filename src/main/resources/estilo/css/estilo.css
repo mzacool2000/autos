@@ -74,10 +74,10 @@ figure .trasera{
 
 }
 .card1{
-	background-image: url(src\main\resources\autos/1.jpg);
+	background-image: url('.. img 1.jpg');
 	background-size: cover;
 }
 .card2{
-	background-image: url(autos/2.jpg);
+	background-image: url('src\main\resources\autos/2.jpg');
 	background-size: cover;
 }
