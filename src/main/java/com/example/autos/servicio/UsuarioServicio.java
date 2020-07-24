@@ -67,11 +67,14 @@ public class UsuarioServicio  implements UserDetailsService  {
     }
     
     @Transactional
-    public void eliminarUsuario(Usuario usuario)throws Error{
-        if(usuario != null){
-        usuarioRepo.delete(usuario);
+    public void eliminarUsuario(String id)throws Error{
+       
+        Optional<Usuario> respuesta = usuarioRepo.findById(id);
+        if (respuesta.isPresent()) {
+            Usuario usuario = respuesta.get();
+            usuarioRepo.delete(usuario);
         }else{
-            throw new Error ("El usuario no puede ser nulo");
+        throw new Error("No se encontro el id de usuario");
         }
     }
     

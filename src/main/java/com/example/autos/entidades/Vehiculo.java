@@ -18,6 +18,7 @@ public class Vehiculo {
     private String id;
         
     private String modelo;
+    
     @ManyToOne
     private Marca marca;
     
