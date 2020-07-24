@@ -37,19 +37,6 @@ public class Vehiculo {
     public Vehiculo() {
     }
 
-    
-    
-    
-    
-    /**
-     * @return the id
-     */
-    
-    
-    
-    public Vehiculo() {
-    }
-
     public String getId() {
         return id;
     }

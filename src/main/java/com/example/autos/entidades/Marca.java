@@ -43,9 +43,6 @@ public class Marca {
         this.habilitado = habilitado;
     }
 
-    public Marca() {
-    }
-    
     /**
      * @param id the id to set
      */
