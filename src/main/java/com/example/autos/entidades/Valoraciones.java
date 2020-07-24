@@ -65,7 +65,7 @@ public class Valoraciones {
     
    public String[] getArray() {
 
-        String[] datos = {vehiculo.getModelo(), vehiculo.getMarca().getNombre(),opinion, valoraciones.toString()};
+        String[] datos = {vehiculo.getModelo(), vehiculo.getMarca().getNombre(),opinion};
         return datos;
    }
    
