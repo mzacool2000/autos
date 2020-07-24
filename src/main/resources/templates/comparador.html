@@ -19,7 +19,7 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="assets/css/login.css">
-<!--<link rel="stylesheet" href=estilo.css">-->
+<link rel="stylesheet" href=estilo.css">
 </head>
 <body>
     <div class="container">
@@ -31,7 +31,7 @@
                         <div class="tarjeta">
                             <div class="frontal card1"></div>
                             <div class="trasera">
-                                 <div class="marca1"> </div>
+                                <div class="marca1"> </div>
                                 <div class="modelo1"> </div>
                             </div>
                         </div>
@@ -53,9 +53,9 @@
                 </div>
             </div>
         </div>
+    </div>
 </body>
 
-</body>
 
 
 
@@ -75,7 +75,7 @@
                                 <option th:each="vehiculo1 : ${marca}"
                                         th:value="${vehiculo.id}"
                                         th:text="${vehiculo.marca}">
-                                    
+
                                 </option>
                             </select> 
                         </div>
@@ -91,7 +91,7 @@
                                 <option th:each="vehiculo1 : ${modelo}"
                                         th:value="${vehiculo.id}"
                                         th:text="${vehiculo.modelo}">
-                                    
+
                                 </option>
                             </select> 
                         </div>
@@ -111,7 +111,7 @@
                                 <option th:each="vehiculo2 : ${marca}"
                                         th:value="${vehiculo.id}"
                                         th:text="${vehiculo.marca}">
-                                    
+
                                 </option>
                             </select> 
                         </div>
@@ -127,7 +127,7 @@
                                 <option th:each="vehiculo2 : ${modelo}"
                                         th:value="${vehiculo.id}"
                                         th:text="${vehiculo.modelo}">
-                                    
+
                                 </option>
                             </select> 
                         </div>
@@ -139,7 +139,7 @@
 
 <body>
     <div class="row">
-      
+
         <div class="col-6"> 
             <input name="Compara" id="Comparar Auto" class= "btn-block btn btn-success mb-4" type="button" value="Comparar">
         </div>
