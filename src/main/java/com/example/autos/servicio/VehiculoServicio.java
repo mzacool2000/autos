@@ -5,7 +5,6 @@ import com.example.autos.entidades.Marca;
 import com.example.autos.entidades.Vehiculo;
 import com.example.autos.enums.TipoCombustible;
 import com.example.autos.repositorio.MarcaRepositorio;
-import com.example.autos.repositorio.UsuarioRepositorio;
 import com.example.autos.repositorio.VehiculoRepositorio;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -24,9 +23,7 @@ public class VehiculoServicio {
 
     @Autowired
     private FotoServicio fotoServicio;
-
-
-
+    private Foto foto;
 
     @Transactional
     public void AgregarVehiculo(MultipartFile archivo, String idMarca, String modelo, String motor, TipoCombustible tipo, Integer cilindrada, Double emision, Double consumoRuta, Double consumoUrbano, Double consumoMixto, boolean habilitado) throws Error {
@@ -69,7 +66,16 @@ public class VehiculoServicio {
             if (respuestaM.isPresent()) {
                 if (archivo != null) {
                     vehiculo.setFoto(fotoServicio.guardar(archivo));
-                }
+                    
+                    String idFoto= null;
+                    if(vehiculo.getFoto()!=null){
+                      idFoto=vehiculo.getFoto().getId();
+                    }
+                            
+                     Foto foto = fotoServicio.actualizar(idFoto, archivo);
+                }    vehiculo.setFoto(foto);
+                
+                vehiculoRepositorio.save(vehiculo);
                 vehiculo.setMarca(respuestaM.get());
                 vehiculo.setCilindrada(cilindrada);
                 vehiculo.setConsumoMixto(consumoMixto);
@@ -80,7 +86,7 @@ public class VehiculoServicio {
                 vehiculo.setModelo(modelo);
                 vehiculo.setMotor(motor);
                 vehiculo.setTipo(tipo);
-                vehiculoRepositorio.save(vehiculo);
+                
             } else {
                 throw new Error("No se ha encotrado la marca");
             }

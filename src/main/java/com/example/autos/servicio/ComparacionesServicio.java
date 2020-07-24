@@ -43,4 +43,8 @@ public class ComparacionesServicio {
             throw new Error("El id esta vacio");
         }
     }
+
+    public Iterable<Comparaciones> resultados() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

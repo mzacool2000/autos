@@ -1,53 +1,54 @@
 package com.example.autos.controladores;
 
-import com.example.autos.servicio.UsuarioServicio;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/")
-public class PortalControlador {
+public class ErroresControlador extends Error{
+    
+    
+    @RequestMapping(value = "/error", method = {RequestMethod.GET, RequestMethod.POST})
+    public String renderErrorPage(HttpServletRequest httpRequest){
+        ModelAndView errorPage = new ModelAndView("error");
+        String errorMsg = "";
+        int httpErrorCode = getErroresCode(httpRequest);
+        
+        switch(httpErrorCode){
+            case 400:{
+                errorMsg = "El recurso solicitado no existe.";
+                break;
+            }
+            case 403:{
+                errorMsg = "No tiene permisos para acceder al recurso.";
+                break;
+            }
+            case 401:{
+                errorMsg = "No se encuentra autorizado.";
+                break;
+            }
+            case 404:{
+                errorMsg = "El recurso solicitado no fue encontrado.";
+                break;
+            }
+            case 500:{
+                errorMsg = "Ocurrió un error interno.";
+                break;
+            }
+        }
+        
+        errorPage.addObject("codigo", httpErrorCode);
+        errorPage.addObject("mensaje", errorMsg);
+        return"errorPage";
+        }
 
-    @Autowired
-    private UsuarioServicio usuarioServicio;
-    
-    
+    private int getErroresCode(HttpServletRequest httpRequest) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    }
     
    
-    @GetMapping("/")
-    public String index() {
-        return "index.html";
-    }
-
-    @GetMapping("/login")
-    public String login() {
-        return "login.html";
-    }
-
-    @GetMapping("/Registro")
-    public String Registro() {
-        return "Registro.html";
-    }
-
-    @PostMapping("/registrar")
-    public String registrar(@RequestParam String nombre,
-            @RequestParam String apellido,
-            @RequestParam String email,
-            @RequestParam String clave,
-            @RequestParam boolean habilitado) {
         
-        System.out.println("Nombre:+nombre");
-        System.out.println("Apellido:+apellido");
-        System.out.println("Email:+email");
-        System.out.println("Clave:+clave");
-        System.out.println("Habilitado:+habilitado");        
-        return "Resgistro.html";
-        
-        
-        usuarioServicio.registrar(nombre,apellido,email,clave,habilitado);
-        
-    
+       
