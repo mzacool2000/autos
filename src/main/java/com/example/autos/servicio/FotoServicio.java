@@ -7,7 +7,6 @@ package com.example.autos.servicio;
 
 import com.example.autos.entidades.Foto;
 import com.example.autos.repositorio.FotoRepositorio;
-import java.io.IOException;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

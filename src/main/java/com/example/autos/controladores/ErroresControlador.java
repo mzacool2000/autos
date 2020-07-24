@@ -39,9 +39,9 @@ public class ErroresControlador extends Error{
             }
         }
         
-        errorPage.addObject("codigo", httpErrorCode);
+        errorPage.addObject("error", httpErrorCode);
         errorPage.addObject("mensaje", errorMsg);
-        return"errorPage";
+        return"exito.html";
         }
 
     private int getErroresCode(HttpServletRequest httpRequest) {
