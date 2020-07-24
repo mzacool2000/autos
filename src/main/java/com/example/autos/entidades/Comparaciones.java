@@ -108,6 +108,4 @@ public class Comparaciones {
             vehiculo2.getMarca().getNombre(), vehiculoganador.getModelo(), vehiculoganador.getMarca().getNombre(), fechaComparacion.toString()};
         return datos;
     }
-        
-    
 }
