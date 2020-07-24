@@ -78,7 +78,7 @@ public class CsvControlador {
         ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(),
             CsvPreference.STANDARD_PREFERENCE);
 
-        String[] header = { "Vehiculo","marca", "Opinion" };
+        String[] header = {"Vehiculo","marca", "Opinion"};
 
         csvWriter.writeHeader(header);
 

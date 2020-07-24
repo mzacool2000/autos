@@ -5,7 +5,6 @@
  */
 package com.example.autos.entidades;
 
-import com.example.autos.enums.ValoracionesEnums;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -23,7 +22,6 @@ public class Valoraciones {
     @OneToOne
     private Vehiculo vehiculo;
     private String opinion;
-    private ValoracionesEnums valoraciones;
 
     /**
      * @return the id
