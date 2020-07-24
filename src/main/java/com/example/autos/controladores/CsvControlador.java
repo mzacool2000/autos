@@ -4,17 +4,17 @@ package com.example.autos.controladores;
 import com.example.autos.entidades.Comparaciones;
 import com.example.autos.entidades.Valoraciones;
 import com.example.autos.servicio.ComparacionesServicio;
-import com.example.autos.servicio.ValoracionesServicio;
+
+import com.example.autos.servicio.VehiculoServicio;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
+
 
 
 
@@ -25,8 +25,11 @@ public class CsvControlador {
     @Autowired
     private ComparacionesServicio comparacionesServicio;
     @Autowired
-    private ValoracionesServicio valoracionesServicio;
+    private valoracionesServicio
     
+    @Autowired
+    private VehiculoServicio vehiculoServicio;
+            
     
     @RequestMapping("/comparacionesCSV")
      public void downloadCSV(HttpServletResponse response) throws IOException {
@@ -52,7 +55,7 @@ public class CsvControlador {
         csvWriter.writeHeader(header);
 
         for (Comparaciones obj : comparacionesServicio.resultados()) {
-            csvWriter.write(obj.getArray(), header);
+            csvWriter.write(obj.getArray());
         }
 
       
@@ -77,22 +80,19 @@ public class CsvControlador {
         ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(),
             CsvPreference.STANDARD_PREFERENCE);
 
-        String[] header = { "Vehiculo","marca", "Opinion", "Valoracion" };
+        String[] header = { "Vehiculo","marca", "Opinion" };
 
         csvWriter.writeHeader(header);
 
         for (Valoraciones obj : valoracionesServicio.resultados()) {
-            csvWriter.write(obj.getArray(), header);
+            csvWriter.write(obj.getArray());
         }
 
       
         csvWriter.close();
     }
      
-     @GetMapping("/tablero")
-     public String tablero(){
-     return "usuariotablero.html";
-     }
+
 }
     
 

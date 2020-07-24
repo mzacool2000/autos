@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Registro</title>
   <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
-  <script src="assets/js/scripts.js"></script>
-  <link rel="stylesheet" href="assets/css/styles.css" />
   <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/login.css">
@@ -28,40 +26,23 @@
               <div class="brand-wrapper">
                 <img src="assets/images/logo.png" alt="logo" class="logo">
               </div>
-              <p class="login-card-description">Bienvenido usario</p>
-              <form action="#!" method="POST">
-
-                  <div class="form-group"  >
-                    <input type="hidden" name="nombre" id="nombre" class="form-control" />
-                    <label for="text" class="sr-only">Nombre</label>
-                  </div>
-                  <div class="form-group">
-                    <label for="text" class="sr-only">Apellido</label>
-                  </div>
-                  <div class="form-group">
-                    <label for="text" Class="sr-only">Email</label>
-                  </div>
-                  <div class="form-group">
-                    <label for="password" class="sr-only">Contraseña</label>
-                  </div>
-                  <div class="form-group">
-                    <label for="password" class="sr-only">Confirmar Contraseña</label>
-                  </div>
-                 
-                  <input name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="button" value="Editar Usuario">
-                </form>
-                <form action="#!" method="POST">
-                  <input type="hidden" name="nombre" id="nombre" class="form-control" />
-                  <input name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="button" value="Crear Usuario" >
-                </form>
-               <a href="/valoracionesCSV"> <i class='fas fa-file-export' style='font-size:20px;color:green'> Bajar Valoraciones</i></a>
+              <p class="login-card-description" th:if="${sesion != null}" th:text=" 'Bienvenido ' + ${sesion.nombre} + ', ' + ${sesion.apellido}"></p>
+              <form action="/editu2" method="POST">
+                    <input type="hidden" name="id" id="id"  th:value="${sesion.id}" class="form-control" />
+                  <button name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="submit" >Editar Usuario</button>
+               </form>
+               
+              <br> <a href="/agregarUsuario"> <i class='fas fa-user-plus' style='font-size:20px;color:green'> Agregar Usuario</i></a>
+               <br> <a href="/agregarmarca"> <i class='fa fa-industry' style='font-size:20px;color:green'> Agregar Marca</i></a>
+              <br> <a href="/agregarvehiculo"> <i class='fas fa-car' style='font-size:20px;color:green'> Administrar Vehiculos</i></a>
+              <br> <a href="/valoracionesCSV"> <i class='fas fa-file-export' style='font-size:20px;color:green'> Bajar Valoraciones</i></a>
                <br> <a href="/comparacionesCSV"> <i class='fas fa-file-export' style='font-size:20px;color:green'> Bajar Comparaciones</i></a>
                 <!-- tabla-->
                 
-                
-                <div class="form-group pull-right">
+                <div>  
+                <br> <div class="form-group pull-right">
                   <input href="/comparacionesCSV" type="text" class="search form-control" placeholder="¿Que Usuario busca?">
-              </div>
+                      </div>
               <span class="counter pull-right"></span>
               <table class="table table table-sm table-dark table-bordered results">
                 <thead>
@@ -78,18 +59,18 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr th:each="cliente:${cleintes}" onclick="seleccionar(this,th:text="${autor.id}")">
+                  <tr th:each="usuario:${usuarios}" onclick="seleccionar(this,th:text="${usuario.id}")">
                       
-                    <td  class="text-white mt-0"><a th:href="@{/editarcliente__${usuario.id}__}">Editar</a>
+                    <td  class="text-white mt-0"><a th:href="@{/editarusuario__${usuario.id}__}">Editar</a>
                     <td th:text="${usuario.nombre}" class="text-white mt-0"></td>
                     <td th:text="${usuario.apellido}" class="text-white mt-0"></td>
-                    <td th:text="${usuario.mail}" class="text-white mt-0"></td>
+                    <td th:text="${usuario.email}" class="text-white mt-0"></td>
                      
                   
                   </tr>
                 </tbody>
               </table>
-
+              </div>
               
                 <!-- tabla-->
             </div>
@@ -102,6 +83,44 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script>
+      $(document).ready(function () {
+	$(".search").keyup(function () {
+		var searchTerm = $(".search").val();
+		var listItem = $(".results tbody").children("tr");
+		var searchSplit = searchTerm.replace(/ /g, "'):containsi('");
 
+		$.extend($.expr[":"], {
+			containsi: function (elem, i, match, array) {
+				return (
+					(elem.textContent || elem.innerText || "")
+						.toLowerCase()
+						.indexOf((match[3] || "").toLowerCase()) >= 0
+				);
+			}
+		});
+
+		$(".results tbody tr")
+			.not(":containsi('" + searchSplit + "')")
+			.each(function (e) {
+				$(this).attr("visible", "false");
+			});
+
+		$(".results tbody tr:containsi('" + searchSplit + "')").each(function (e) {
+			$(this).attr("visible", "true");
+		});
+
+		var jobCount = $('.results tbody tr[visible="true"]').length;
+		$(".counter").text(jobCount + " item");
+
+		if (jobCount == "0") {
+			$(".no-result").show();
+		} else {
+			$(".no-result").hide();
+		}
+	});
+});
+
+  </script>
 </body>
 </html>

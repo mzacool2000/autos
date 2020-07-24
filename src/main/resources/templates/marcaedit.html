@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" type="text/css" href="estilos.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Login Template</title>
+  <title>Registro</title>
   <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -17,33 +16,30 @@
       <div class="card login-card">
         <div class="row no-gutters">
           <div class="col-md-5">
-            <img src="assets/images/login.jpg" alt="login" class="login-card-img">
+            <img src="assets/images/crear.jpg" alt="login" class="login-card-img">
           </div>
           <div class="col-md-7">
             <div class="card-body">
               <div class="brand-wrapper">
                 <img src="assets/images/logo.png" alt="logo" class="logo">
               </div>
-              <p class="login-card-description">Iniciar sesión</p>
-              <form action="/loginchek" method="POST">
-
-                
-                  <div class="form-group">
-                    <label for="text" Class="sr-only">Email</label>
-                    <input type="text" name="email" id="email" class="form-control" placeholder="Direccion de correo">
-                  </div>
-                  <div class="form-group">
-                    <label for="password" class="sr-only">Contraseña</label>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña">
-                  </div>
-                
+              <p class="login-card-description">Agregar Marca</p>
+              <div class="form-group"  >
+              <form action="/agregarM" method="POST">
+                   <input type="hidden" name="nombre" id="nombre" class="form-control" />
                  
-                  <button name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="submit" >Inicia Sesion</button>
+                   
+                    <label>Nombre de la marca</label>
+                    <input type="text" name="nombre" id="nombre" class="form-control" />
+                 
+                  
+                    <label>Habilitada</label>
+                    <input type="checkbox" name="habilitado" id="email" class="checkbox" />
+                  
+                  
+                    <br/><button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
-                <a href="/restoreP" class="forgot-password-link">
-                  ¿Se te olvidó se contraseña?</a>
-             
-              
+              </div>
             </div>
           </div>
         </div>

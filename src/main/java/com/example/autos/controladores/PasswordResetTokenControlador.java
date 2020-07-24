@@ -33,6 +33,13 @@ public class PasswordResetTokenControlador {
     private NotificacionServicio notificacionServicio;
     @Autowired
     private PasswordResetTokenService passwordResetTokenService;
+    
+    @GetMapping("/restoreP")
+    public String restorep(){
+    
+    
+    return "rer-contrase.html";
+    }
 
     @PostMapping("/user/resetPassword")
     public GenericResponse resetPassword(HttpServletRequest request, @RequestParam("email") String userEmail) throws Error {
@@ -43,7 +50,7 @@ public class PasswordResetTokenControlador {
         }
         String token = UUID.randomUUID().toString();
         passwordResetTokenService.createPasswordResetTokenForUser(empleado, token);
-        notificacionServicio.enviar(notificacionServicio.constructResetTokenEmail("http://bonosartrans.ddns.net", request.getLocale(), token, empleado));
+        notificacionServicio.enviar(notificacionServicio.constructResetTokenEmail("http://127.0.0.1:8080", request.getLocale(), token, empleado));
         return new GenericResponse("message.resetPasswordEmail");
     }
 
