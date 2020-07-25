@@ -26,11 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
     
     
    
-    @GetMapping("/")
-    public String index() {
-        return "index.html";
-    }
-    
+   
     
     @GetMapping("/login")
     public String login(@RequestParam(required = false)String error, @RequestParam(required = false) String logout,ModelMap model) {
@@ -47,17 +43,14 @@ import org.springframework.web.multipart.MultipartFile;
     }
 
     @PostMapping("/registrar")
-    
-    
     public String registrar(
-            
     ModelMap modelo,
     MultipartFile archivo,
     @RequestParam String nombre,
     @RequestParam String apellido,
     @RequestParam String email,
     @RequestParam String clave,
-    @RequestParam boolean habilitado) {
+    @RequestParam String habilitado) {
     
     
     System.out.println("Nombre:+nombre");
@@ -65,10 +58,11 @@ import org.springframework.web.multipart.MultipartFile;
     System.out.println("Email:+email");
     System.out.println("Clave:+clave");
     System.out.println("Habilitado:+habilitado"); 
-
+ 
+     boolean chk = !(habilitado == null);
     
         try {
-            usuarioServicio.crearUsuario(archivo,nombre, apellido, email, clave, habilitado);
+            usuarioServicio.crearUsuario(nombre, apellido, email, clave, chk);
         } catch (Error e) {
          modelo.put("error",e.getMessage()); 
          modelo.put("nombre", nombre);
