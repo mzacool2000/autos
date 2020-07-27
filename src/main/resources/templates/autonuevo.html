@@ -35,7 +35,7 @@
                 <img src="assets/images/logo.png" alt="logo" class="logo">
               </div>
               <p class="login-card-description" th:text = "${vehiculoEd} == null ? 'Crear Vehiculo' : 'Editar Vehiculo' "></p>
-              <form action="#!" method="POST">
+              <form action="/adminvehiculo" method="POST" enctype="multipart/form-data">
 
                   <div class="form-group"  >
                       <input type= "hidden"  name="id"  th:value="${vehiculoEd} == null ? null : ${vehiculoEd.id}" />  
@@ -43,7 +43,7 @@
                     <input type="text" name="modelo"  class="form-control"  th:value="${vehiculoEd} == null ? null : ${vehiculoEd.modelo}"/>
                   </div>
                   <label><p class="form-group" >Marca</p></label>
-                  <select class="form-control" name="marcas">
+                  <select class="form-control" name="marcaid">
                       <option type="text" class="form-control" th:each="marca:${marcas}" th:value="${marca.id}"
                               th:text="${marca.nombre}" th:selected="${vehiculoEd} != null  ? ${marca.nombre} == ${vehiculoEd.marca.nombre}"></option>
                   </select>  
@@ -70,28 +70,40 @@
                     <input type="number" name="consumoCiudad" class="form-control"  th:value="${vehiculoEd} == null ? null : ${vehiculoEd.consumoUrbano}" />
                   
                
-                
+
                     <label for="text" class="form-group">Consumo Mixto</label>
                     <input type="number" name="consumoMixto"  class="form-control"  th:value="${vehiculoEd} == null ? null : ${vehiculoEd.consumoMixto}" />
-                
-                 
-                    <label for="text" class="form-group">Consumo en ruta</label>
-                    <input type="number" name="consumoRuta" class="form-control"  th:value="${vehiculoEd} == null ? null : ${vehiculoEd.consumoRuta}" />
-                
-                  <label for="text" class="form-group">Tipo de Combustible</label>
-                  <select name="color">
-                      <option th:each="combustibleOpt : ${T(com.example.autos.enums.TipoCombustible).values()}" 
-                              th:value="${combustibleOpt}" th:text="${combustibleOpt}" th:selected="${vehiculoEd} != null  ? ${combustibleOpt} == ${vehiculoEd.tipo}"></option>
-                  </select>
-                  <input class="form-group" type="file" name="imagen">
 
-                  <label>Habilitado</label>
-                  <input type="checkbox" name="habilitado" id="habilitado" th:checked="${vehiculoEd} != null and ${vehiculoEd.habilitado} == true ? 'checked'" class="checkbox" />
-                 <button name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="submit" th:text="${vehiculoEd} == null ? 'Agregar Vehiculo' : 'Editar Vehiculo'"></button>
-                </form>
-                <header class="masthead">
+
+                    <label for="text" class="form-group">Tipo de Combustible</label>
+                    <select name="combustible">
+                        <option th:each="combustibleOpt : ${T(com.example.autos.enums.TipoCombustible).values()}" 
+                                th:value="${combustibleOpt}" th:text="${combustibleOpt}" th:selected="${vehiculoEd} != null  ? ${combustibleOpt} == ${vehiculoEd.tipo}"></option>
+                    </select>
+                    <img th:if="${vehiculoEd} != null " 
+                         th:src="${vehiculoEd.foto} == null ? 'assets/images/logo.png' : @{/cargar/__${vehiculoEd.foto.id}__}" class="" style="width:180px">  
+                    <input class="form-group" type="file" name="archivo">
+
+                    <label>Habilitado</label>
+                    <input type="checkbox" name="habilitado" id="habilitado" th:checked="${vehiculoEd} != null and ${vehiculoEd.habilitado} == true ? 'checked'" class="checkbox" />
+                    <button name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="submit" th:text="${vehiculoEd} == null ? 'Agregar Vehiculo' : 'Editar Vehiculo'"></button>
+              </form>
+              <form th:if="${vehiculoEd} != null" action="/autodelet" method="POST">
+
+                  <input type= "hidden"  name="id"  th:value="${vehiculoEd} == null ? null : ${vehiculoEd.id}" />  
+                  <button name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="submit" >Eliminar</button>
+
+              </form>
+              <header class="masthead">
                   <div class="container h-100">
                       <div class="row h-100 align-items-center justify-content-center text-center">
+
+
+
+                          
+                          
+                          
+                          
                           <!-- tabla-->
 
                            
@@ -132,7 +144,10 @@
                 <tbody>
                   <tr th:each="vehiculo:${vehiculos}" onclick="seleccionar(this,th:text="${vehiculo.id}")">
                       
-                      <td  class="text-white mt-0"><a th:href="@{/editarvehiculo__${vehiculo.id}__}">Editar</a>
+                      <td  class="text-white mt-0 center-block"><img th:if="${vehiculo.foto} != null " 
+                           th:src="@{/cargar/__${vehiculo.foto.id}__}" style="width: 80px">    
+                      <a th:href="@{/editarvehiculo__${vehiculo.id}__}" th:text="Editar"></a></td>
+                     
                       <td th:text="${vehiculo.modelo}" class="text-white mt-0"></td>
                       <td th:text="${vehiculo.marca.nombre}" class="text-white mt-0"></td>
                       <td th:text="${vehiculo.motor}" class="text-white mt-0"></td>
