@@ -5,7 +5,6 @@
  */
 package com.example.autos.controladores;
 
-import com.example.autos.entidades.Marca;
 import com.example.autos.entidades.Vehiculo;
 import com.example.autos.repositorio.ComparacionesRepositorio;
 import com.example.autos.repositorio.MarcaRepositorio;
@@ -13,7 +12,6 @@ import com.example.autos.repositorio.VehiculoRepositorio;
 import com.example.autos.servicio.ComparacionesServicio;
 import com.example.autos.servicio.ValoracionesServicio;
 import java.util.Optional;
-import net.bytebuddy.dynamic.DynamicType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,15 +25,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class indexControlador {
     @Autowired
     private VehiculoRepositorio vehiculoRepositorio;
-    @Autowired
-    private MarcaRepositorio marcaRepositorio;
+
     @Autowired
     private ValoracionesServicio valoracionesServicio;
     @Autowired
     private ComparacionesServicio comparacionesServicio;
-    @Autowired
-    private ComparacionesRepositorio comparacionesRepositorio;
-            
+
     
    @GetMapping("/")
    public String inicio(ModelMap modelo){
