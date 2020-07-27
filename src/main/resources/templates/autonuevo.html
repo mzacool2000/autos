@@ -34,7 +34,7 @@
               <div class="brand-wrapper">
                 <img src="assets/images/logo.png" alt="logo" class="logo">
               </div>
-              <p class="login-card-description" th:text = "${vehiculoEd} == null ? 'Crear Vehiculo' : 'Editar Vehiculo' "></p>
+              <p class="login-card-description" th:text = "${vehiculoEd} == null ? 'Crear Vehiculo' : 'Editar Vehiculo' "></p>              
               <form action="#!" method="POST">
 
                   <div class="form-group"  >
@@ -88,6 +88,11 @@
                   <label>Habilitado</label>
                   <input type="checkbox" name="habilitado" id="habilitado" th:checked="${vehiculoEd} != null and ${vehiculoEd.habilitado} == true ? 'checked'" class="checkbox" />
                  <button name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="submit" th:text="${vehiculoEd} == null ? 'Agregar Vehiculo' : 'Editar Vehiculo'"></button>
+                  <div>
+                <a href="/login">
+                <button name="back" id="back" class="btn-block btn btn-success mb-4" style="position:relative; bottom: 1290px; left:640px">Inicio</button>
+                </a>
+            </div>
                 </form>
                 <header class="masthead">
                   <div class="container h-100">
