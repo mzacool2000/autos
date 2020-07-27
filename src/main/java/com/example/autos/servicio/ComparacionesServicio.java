@@ -5,11 +5,16 @@ import com.example.autos.entidades.Comparaciones;
 import com.example.autos.entidades.Vehiculo;
 import com.example.autos.repositorio.ComparacionesRepositorio;
 import com.example.autos.repositorio.VehiculoRepositorio;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.supercsv.cellprocessor.FmtDate;
+import org.supercsv.cellprocessor.constraint.NotNull;
+import org.supercsv.cellprocessor.ift.CellProcessor;
 
 @Service
 public class ComparacionesServicio {
@@ -43,8 +48,30 @@ public class ComparacionesServicio {
             throw new Error("El id esta vacio");
         }
     }
-
-    public Iterable<Comparaciones> resultados() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public List<Comparaciones> resultados() throws Error{
+         
+      List<Comparaciones> comparaciones = new ArrayList<>();
+      comparaciones =  ComparacionesRepositorio.findAll();
+        
+     return comparaciones;   
     }
+         public CellProcessor[] getProcessors() {
+        
+        final CellProcessor[] processors = new CellProcessor[] { 
+                new NotNull(), // modelo1
+                new NotNull(), // marca1
+                new NotNull(), // modelo2
+                new NotNull(), // marca2
+                new NotNull(), // ganadormarca
+                new NotNull(), // ganadormodelo
+                 new NotNull(), // fecha
+  
+        };
+        
+        return processors;
+    
+    
+    
+}
 }

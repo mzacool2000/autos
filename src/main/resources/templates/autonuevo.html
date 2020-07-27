@@ -35,7 +35,7 @@
                 <img src="assets/images/logo.png" alt="logo" class="logo">
               </div>
               <p class="login-card-description" th:text = "${vehiculoEd} == null ? 'Crear Vehiculo' : 'Editar Vehiculo' "></p>
-              <form action="/adminvehiculo" method="POST">
+              <form action="/adminvehiculo" method="POST" enctype="multipart/form-data">
 
                   <div class="form-group"  >
                       <input type= "hidden"  name="id"  th:value="${vehiculoEd} == null ? null : ${vehiculoEd.id}" />  
@@ -80,7 +80,9 @@
                         <option th:each="combustibleOpt : ${T(com.example.autos.enums.TipoCombustible).values()}" 
                                 th:value="${combustibleOpt}" th:text="${combustibleOpt}" th:selected="${vehiculoEd} != null  ? ${combustibleOpt} == ${vehiculoEd.tipo}"></option>
                     </select>
-                    <input class="form-group" type="file" name="imagen">
+                    <img th:if="${vehiculoEd} != null " 
+                         th:src="${vehiculoEd.foto} == null ? 'assets/images/logo.png' : @{/cargar/__${vehiculoEd.foto.id}__}" class="" style="width:180px">  
+                    <input class="form-group" type="file" name="archivo">
 
                     <label>Habilitado</label>
                     <input type="checkbox" name="habilitado" id="habilitado" th:checked="${vehiculoEd} != null and ${vehiculoEd.habilitado} == true ? 'checked'" class="checkbox" />
@@ -142,7 +144,10 @@
                 <tbody>
                   <tr th:each="vehiculo:${vehiculos}" onclick="seleccionar(this,th:text="${vehiculo.id}")">
                       
-                      <td  class="text-white mt-0"><a th:href="@{/editarvehiculo__${vehiculo.id}__}">Editar</a>
+                      <td  class="text-white mt-0 center-block"><img th:if="${vehiculo.foto} != null " 
+                           th:src="@{/cargar/__${vehiculo.foto.id}__}" style="width: 80px">    
+                      <a th:href="@{/editarvehiculo__${vehiculo.id}__}" th:text="Editar"></a></td>
+                     
                       <td th:text="${vehiculo.modelo}" class="text-white mt-0"></td>
                       <td th:text="${vehiculo.marca.nombre}" class="text-white mt-0"></td>
                       <td th:text="${vehiculo.motor}" class="text-white mt-0"></td>

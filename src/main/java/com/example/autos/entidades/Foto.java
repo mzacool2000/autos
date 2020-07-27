@@ -1,6 +1,8 @@
 
 package com.example.autos.entidades;
 
+import java.util.Base64;
+import java.util.Optional;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 
 
 
@@ -82,4 +89,9 @@ public class Foto {
         this.contenido = contenido;
     }
     
+        public ResponseEntity<byte[]> cargarfoto(){
+        final HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.parseMediaType(mime));
+        return new ResponseEntity<>(contenido, headers, HttpStatus.OK);
+    }
 }

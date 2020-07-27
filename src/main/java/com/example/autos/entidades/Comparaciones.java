@@ -102,10 +102,7 @@ public class Comparaciones {
         this.vehiculoganador = vehiculoganador;
     }
     
-    public String[] getArray() {
 
-        String[] datos = {vehiculo1.getModelo(), vehiculo1.getMarca().getNombre(), vehiculo2.getModelo(),
-            vehiculo2.getMarca().getNombre(), vehiculoganador.getModelo(), vehiculoganador.getMarca().getNombre(), fechaComparacion.toString()};
-        return datos;
-    }
+        
+    
 }
