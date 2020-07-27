@@ -20,6 +20,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class UsuarioServicio  implements UserDetailsService  {
@@ -116,6 +117,10 @@ public class UsuarioServicio  implements UserDetailsService  {
         } else {
             return null;
         }
+    }
+
+    public void crearUsuario(MultipartFile archivo, String nombre, String apellido, String email, String clave, boolean habilitado) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
