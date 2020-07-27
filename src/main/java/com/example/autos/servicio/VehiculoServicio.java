@@ -1,11 +1,9 @@
 package com.example.autos.servicio;
 
-import com.example.autos.entidades.Foto;
 import com.example.autos.entidades.Marca;
 import com.example.autos.entidades.Vehiculo;
 import com.example.autos.enums.TipoCombustible;
 import com.example.autos.repositorio.MarcaRepositorio;
-import com.example.autos.repositorio.UsuarioRepositorio;
 import com.example.autos.repositorio.VehiculoRepositorio;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -24,7 +22,6 @@ public class VehiculoServicio {
 
     @Autowired
     private FotoServicio fotoServicio;
-
 
 
 
@@ -48,9 +45,8 @@ public class VehiculoServicio {
         vehiculo.setConsumoRuta(consumoRuta);
         vehiculo.setConsumoMixto(consumoMixto);
         vehiculo.setHabilitado(habilitado);
-
-        Foto foto = fotoServicio.guardar(archivo);
-        vehiculo.setFoto(foto);
+        vehiculo.setFoto(fotoServicio.guardar(archivo));
+ 
         vehiculoRepositorio.save(vehiculo);
     }
 
@@ -81,6 +77,7 @@ public class VehiculoServicio {
                 vehiculo.setMotor(motor);
                 vehiculo.setTipo(tipo);
                 vehiculo.setHabilitado(habilitado);
+                vehiculo.setFoto(fotoServicio.guardar(archivo));
                 vehiculoRepositorio.save(vehiculo);
             } else {
                 throw new Error("No se ha encotrado la marca");

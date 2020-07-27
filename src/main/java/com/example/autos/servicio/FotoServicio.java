@@ -19,7 +19,7 @@ public class FotoServicio {
     
     @Transactional
     public Foto guardar(MultipartFile archivo) throws Error {
-        if (archivo == null) {
+        if (archivo != null) {
             try {
 
                 Foto foto = new Foto();
