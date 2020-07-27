@@ -1,4 +1,3 @@
-
 package com.example.autos.controladores;
 
 import com.example.autos.entidades.Vehiculo;
@@ -14,37 +13,34 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class VehiculoControlador {
 
-@Autowired
-private MarcaRepositorio marcaRepositorio;
-@Autowired
-private VehiculoRepositorio vehiculoRepositorio;
+    @Autowired
+    private MarcaRepositorio marcaRepositorio;
+    @Autowired
+    private VehiculoRepositorio vehiculoRepositorio;
 
-    
-@GetMapping("/agregarvehiculo")
-public String agregavehiculo(ModelMap modelo){
-    
-   
-    
-    
-    modelo.put("vehiculos",vehiculoRepositorio.findAll());
+    @GetMapping("/agregarvehiculo")
+    public String agregavehiculo(ModelMap modelo) {
 
-    modelo.put("marcas", marcaRepositorio.findAll());
-    
-return "autonuevo.html";
-}
-@GetMapping("/editarvehiculo{id}")
-public String editarv(ModelMap modelo , @PathVariable String id){
+        modelo.put("vehiculos", vehiculoRepositorio.findAll());
 
-    Optional<Vehiculo> respuesta = vehiculoRepositorio.findById(id);
-    if (respuesta.isPresent()) {
-        System.out.println("tengo el vehiculo");
-        modelo.put("vehiculoEd", respuesta.get());
-        modelo.put("vehiculos",vehiculoRepositorio.findAll());
         modelo.put("marcas", marcaRepositorio.findAll());
-        System.out.println("le mande todo al modelo");
-    return "autonuevo.html";
+
+        return "autonuevo.html";
     }
 
-return "/agregarvehiculo";
-}
+    @GetMapping("/editarvehiculo{id}")
+    public String editarv(ModelMap modelo, @PathVariable String id) {
+
+        Optional<Vehiculo> respuesta = vehiculoRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+            System.out.println("tengo el vehiculo");
+            modelo.put("vehiculoEd", respuesta.get());
+            modelo.put("vehiculos", vehiculoRepositorio.findAll());
+            modelo.put("marcas", marcaRepositorio.findAll());
+            System.out.println("le mande todo al modelo");
+            return "autonuevo.html";
+        }
+
+        return "/agregarvehiculo";
+    }
 }

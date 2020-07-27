@@ -83,7 +83,7 @@
 
 .card1{
 	background-image: url(assets/imges/1.jpg);
-	background-size: auto;
+	background-size: cover;
 }
 
 
