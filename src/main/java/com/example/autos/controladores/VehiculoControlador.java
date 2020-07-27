@@ -1,4 +1,3 @@
-
 package com.example.autos.controladores;
 
 import com.example.autos.entidades.Vehiculo;
@@ -18,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class VehiculoControlador {
+
 
 @Autowired
 private MarcaRepositorio marcaRepositorio;
@@ -44,13 +44,29 @@ public String editarv(ModelMap modelo , @PathVariable String id){
         System.out.println("tengo el vehiculo");
         modelo.put("vehiculoEd", respuesta.get());
         modelo.put("vehiculos",vehiculoRepositorio.findAll());
+
         modelo.put("marcas", marcaRepositorio.findAll());
-        System.out.println("le mande todo al modelo");
-    return "autonuevo.html";
+
+        return "autonuevo.html";
     }
 
-return "/agregarvehiculo";
+    @GetMapping("/editarvehiculo{id}")
+    public String editarv(ModelMap modelo, @PathVariable String id) {
+
+        Optional<Vehiculo> respuesta = vehiculoRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+            System.out.println("tengo el vehiculo");
+            modelo.put("vehiculoEd", respuesta.get());
+            modelo.put("vehiculos", vehiculoRepositorio.findAll());
+            modelo.put("marcas", marcaRepositorio.findAll());
+            System.out.println("le mande todo al modelo");
+            return "autonuevo.html";
+        }
+
+        return "/agregarvehiculo";
+    }
 }
+
 
 @PostMapping("/adminvehiculo")
 private String adminvehiculo(ModelMap model, @RequestParam(required = false) String id, @RequestParam String modelo,@RequestParam String marcaid,
@@ -94,3 +110,5 @@ public String autodelet(@RequestParam String id, ModelMap modelo){
 return "exito.html";    
 }
 }
+
+
