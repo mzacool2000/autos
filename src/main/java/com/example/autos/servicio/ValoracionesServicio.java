@@ -1,18 +1,18 @@
 
 package com.example.autos.servicio;
 
-import com.example.autos.entidades.Comparaciones;
 import com.example.autos.entidades.Valoraciones;
 import com.example.autos.entidades.Vehiculo;
 import com.example.autos.repositorio.ValoracionesRepositorio;
 import com.example.autos.repositorio.VehiculoRepositorio;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.supercsv.cellprocessor.constraint.NotNull;
+import org.supercsv.cellprocessor.ift.CellProcessor;
 
 @Service
 public class ValoracionesServicio  {
@@ -53,8 +53,18 @@ public class ValoracionesServicio  {
      return valoraciones;   
     }
     
+     public CellProcessor[] getProcessors() {
+        
+        final CellProcessor[] processors = new CellProcessor[] { 
+                new NotNull(), // modelo
+                new NotNull(), // marca
+                new NotNull(), // opinion
+  
+        };
+        
+        return processors;
     
     
     
-    
+}
 }

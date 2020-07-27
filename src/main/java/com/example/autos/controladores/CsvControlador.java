@@ -2,15 +2,22 @@
 package com.example.autos.controladores;
 
 import com.example.autos.entidades.Comparaciones;
+import com.example.autos.entidades.CsvValoraciones;
+import com.example.autos.entidades.CvsComparaciones;
 import com.example.autos.entidades.Valoraciones;
 import com.example.autos.servicio.ComparacionesServicio;
 import com.example.autos.servicio.ValoracionesServicio;
 import com.example.autos.servicio.VehiculoServicio;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.supercsv.cellprocessor.ift.CellProcessor;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
@@ -47,16 +54,18 @@ public class CsvControlador {
         ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(),
             CsvPreference.STANDARD_PREFERENCE);
 
-        String[] header = { "nombre del modelo del vehiculo1 ","marca del vehiculo1","vehiculo 2 mdelo","vehiculo 2 marca","vehiculo ganador modelo","vehiculo ganador marca"
-                ,"fecha de comparacion"};
+           String[] header = { "modelo1","marca1","modelo2","marca2","ganadorModelo","ganadorMarca","fecha" };
+            
+            csvWriter.writeHeader(header);
+            final CellProcessor[] processors = comparacionesServicio.getProcessors();
+            for (Comparaciones obj : comparacionesServicio.resultados()) {
+                
+                CvsComparaciones cvs= new CvsComparaciones(obj.getVehiculo1().getModelo(), obj.getVehiculo1().getMarca().getNombre(), obj.getVehiculo2().getModelo(),
+                        obj.getVehiculo2().getMarca().getNombre(), obj.getVehiculoganador().getModelo(), obj.getVehiculoganador().getMarca().getNombre(),obj.getFechaComparacion().toString());
+                
+                csvWriter.write(cvs,header,processors);
 
-        csvWriter.writeHeader(header);
-
-        for (Comparaciones obj : comparacionesServicio.resultados()) {
-            csvWriter.write(obj.getArray());
-        }
-
-      
+            }
         csvWriter.close();
     }
      
@@ -74,20 +83,22 @@ public class CsvControlador {
         response.setHeader(headerKey, headerValue);
 
 
-        // uses the Super CSV API to generate CSV data from the model data
-        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(),
-            CsvPreference.STANDARD_PREFERENCE);
+        try ( // uses the Super CSV API to generate CSV data from the model data
+            ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(),
+                        CsvPreference.STANDARD_PREFERENCE)) {
+            String[] header = {"vehiculo","marca", "opinion"};
+            
+            csvWriter.writeHeader(header);
+            final CellProcessor[] processors = valoracionesServicio.getProcessors();
 
-        String[] header = { "Vehiculo","marca", "Opinion" };
-
-        csvWriter.writeHeader(header);
-
-        for (Valoraciones obj : valoracionesServicio.resultados()) {
-            csvWriter.write(obj.getArray());
+            
+            
+            for (Valoraciones obj : valoracionesServicio.resultados()) {
+                CsvValoraciones valoracion = new CsvValoraciones(obj.getVehiculo().getModelo(),obj.getVehiculo().getMarca().getNombre(),obj.getOpinion());
+                csvWriter.write(valoracion,header,processors);
+            }
+            csvWriter.close();
         }
-
-      
-        csvWriter.close();
     }
      
 
