@@ -64,7 +64,7 @@ public class TableroControlador {
            boolean chk = !(habilitado == null);
            System.out.println(chk);
            
-        if ( id == null) {
+        if ( id == null || id.isEmpty()) {
             System.out.println("estoy agregando");
             marcaServicio.agregarMarca(nombre, chk);
             modelo.put("titulo", "Felicidades");

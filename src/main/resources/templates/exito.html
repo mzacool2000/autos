@@ -18,8 +18,8 @@
       <div class="card login-card">
         <div class="row no-gutters">
           <div class="col-md-5">
-            <br><br><CENTER> <h2  th:if="${error == null}" class="fas fa-8x fa-check" style="color: green;"  > </h2></CENTER>
-            <br><br><CENTER> <h2  th:if="${error != null}" class="fas fa-8x fa-exclamation	" style="color: green;"  > </h2></CENTER>
+            <br><br><CENTER> <h2  th:if="${error} == null" class="fas fa-8x fa-check" style="color: green;"  > </h2></CENTER>
+            <br><br><CENTER> <h2  th:if="${error} != null" class="fas fa-8x fa-exclamation" style="color: red;"  > </h2></CENTER>
           </div>
           <div class="col-md-7">
             <div class="card-body">
@@ -30,14 +30,14 @@
       
         <!-- Services-->
         <section class="page-section text-center" id="services">
-           <h1> <a th:if="${session.usuario != null}" class="h4 mb-2" href="/tablero"  style="color: green;" >Continuar</a></h1>
-           <h1> <a th:if="${session.usuario == null}" class="h4 mb-2" href="/"  style="color: green;" >Continuar</a></h1>
+           <h1> <a th:if="${session.usuario} != null" class="h4 mb-2" href="/tablero"  style="color: green;" >Continuar</a></h1>
+           <h1> <a th:if="${session.usuario} == null" class="h4 mb-2" href="/"  style="color: green;" >Continuar</a></h1>
               
                 
                             <h3 aling="center" class="h4 mb-2"  th:text=${titulo} ></h3>
                             <p aling="center" class="text-muted mb-0"  th:text=${mensaje}></p>
-                             <p th:if="${error != null}" th:text="${error}" style="color:red;"></p>
-                             <p th:each="obj:${bonosno}"  th:text="${obj}" style="color:red;"></p>
+                             <p th:if="${error} != null" th:text="${error}" style="color:red;"></p>
+                           
                             
                             
                    
