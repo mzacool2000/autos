@@ -1,20 +1,26 @@
 package com.example.autos.controladores;
 
+import java.util.Map;
+import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class ErroresControlador extends Error{
+public class ErroresControlador implements ErrorController{
+    
     
     
     @RequestMapping(value = "/error", method = {RequestMethod.GET, RequestMethod.POST})
     public String renderErrorPage(HttpServletRequest httpRequest){
-        ModelAndView errorPage = new ModelAndView("error");
+        ModelMap modelo = new ModelMap();
         String errorMsg = "";
-        int httpErrorCode = getErroresCode(httpRequest);
+        int httpErrorCode = getErrorCode(httpRequest);
         
         switch(httpErrorCode){
             case 400:{
@@ -38,16 +44,36 @@ public class ErroresControlador extends Error{
                 break;
             }
         }
-        
-        errorPage.addObject("error", httpErrorCode);
-        errorPage.addObject("mensaje", errorMsg);
-        return"exito.html";
+       
+        modelo.put("error", httpErrorCode);
+        modelo.put("mensaje", errorMsg);
+        return "error.html";
         }
 
-    private int getErroresCode(HttpServletRequest httpRequest) {
+
+
+  
+    public int getErrorCode(HttpServletRequest httpRequest) {
+        Map mapa = httpRequest.getParameterMap();
+        for (Object Key : mapa.keySet()) {
+            String[] valores = (String[]) mapa.get(Key);
+            for (String valor : valores) {
+                System.out.println(Key.toString()+":"+ valor);
+                
+            }
+            
+        }
+    return mapa.hashCode();
+    }
+
+    @Override
+    public String getErrorPath() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     }
+
+ 
+    
     
    
         
