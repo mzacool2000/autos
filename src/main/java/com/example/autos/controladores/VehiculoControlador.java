@@ -65,7 +65,6 @@ private String adminvehiculo(ModelMap model, @RequestParam(required = false) Str
                 vehiculoServicio.AgregarVehiculo(archivo, marcaid, modelo, motor, combustible, cilindrada, emision, consumoRuta, consumoCiudad, consumoMixto, chk);
             }else{
             if (archivo != null) {
-                System.out.println("RECIBI LA IMAGEN!!!!!!!!!!!!!!");
              }
             vehiculoServicio.modificar(archivo, id, marcaid, modelo, motor, combustible, cilindrada, emision, consumoRuta, consumoCiudad, consumoMixto,chk);
             return "redirect:/agregarvehiculo";

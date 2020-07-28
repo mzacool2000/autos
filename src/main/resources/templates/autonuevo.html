@@ -80,8 +80,8 @@
                         <option th:each="combustibleOpt : ${T(com.example.autos.enums.TipoCombustible).values()}" 
                                 th:value="${combustibleOpt}" th:text="${combustibleOpt}" th:selected="${vehiculoEd} != null  ? ${combustibleOpt} == ${vehiculoEd.tipo}"></option>
                     </select>
-                    <img th:if="${vehiculoEd} != null " 
-                         th:src="${vehiculoEd.foto} == null ? 'assets/images/logo.png' : @{/cargar/__${vehiculoEd.foto.id}__}" class="" style="width:180px">  
+                    <img th:if="${vehiculoEd.foto} != null" 
+                         th:src="@{/cargar/__${vehiculoEd.foto.id}__}" class="" style="width:180px">  
                     <input class="form-group" type="file" name="archivo">
 
                     <label>Habilitado</label>
