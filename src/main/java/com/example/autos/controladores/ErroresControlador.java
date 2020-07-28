@@ -47,7 +47,7 @@ public class ErroresControlador implements ErrorController{
        
         modelo.put("error", httpErrorCode);
         modelo.put("mensaje", errorMsg);
-        return "exito.html";
+        return "error.html";
         }
 
 
