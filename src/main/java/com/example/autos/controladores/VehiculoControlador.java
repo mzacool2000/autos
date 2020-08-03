@@ -18,22 +18,28 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class VehiculoControlador {
 
-    @Autowired
-    private MarcaRepositorio marcaRepositorio;
-    @Autowired
-    private VehiculoRepositorio vehiculoRepositorio;
-    @Autowired
-    private VehiculoServicio vehiculoServicio;
 
-    @GetMapping("/agregarvehiculo")
-    public String agregavehiculo(ModelMap modelo) {
 
-        modelo.put("vehiculos", vehiculoRepositorio.findAll());
+@Autowired
+private MarcaRepositorio marcaRepositorio;
+@Autowired
+private VehiculoRepositorio vehiculoRepositorio;
+@Autowired
+private VehiculoServicio vehiculoServicio;
+    
+@GetMapping("/agregarvehiculo")
+public String agregavehiculo(ModelMap modelo){
+    
+    
+    modelo.put("vehiculos",vehiculoRepositorio.findAll());
 
-        modelo.put("marcas", marcaRepositorio.findAll());
+    modelo.put("marcas", marcaRepositorio.findAll());
+    
+return "autonuevo.html";
+}
 
-        return "autonuevo.html";
-    }
+ 
+
 
     @GetMapping("/editarvehiculo{id}")
     public String editarv(ModelMap modelo, @PathVariable String id) {
@@ -50,6 +56,7 @@ public class VehiculoControlador {
 
         return "/agregarvehiculo";
     }
+
 
     @PostMapping("/adminvehiculo")
     private String adminvehiculo(ModelMap model, @RequestParam(required = false) String id, @RequestParam String modelo, @RequestParam String marcaid,

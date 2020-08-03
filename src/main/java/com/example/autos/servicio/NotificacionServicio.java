@@ -39,8 +39,8 @@ public class NotificacionServicio {
         mailSender.send(mensaje);
     }
     
- public SimpleMailMessage constructResetTokenEmail(String contextPath, Locale locale, String token, Usuario usuario) {
-    String url = contextPath + "/user/changePassword" + token;
+ public SimpleMailMessage constructResetTokenEmail(String contextPath, Locale locale, String token, Usuario usuario) { // constuye un mail para el usario
+    String url = contextPath + "/user/changePassword" + token;   
     String message = "message.resetPassword";
     return constructEmail("Reset Password", message + " \r\n" + url, usuario);
 }

@@ -7,12 +7,7 @@ import com.example.autos.entidades.CvsComparaciones;
 import com.example.autos.entidades.Valoraciones;
 import com.example.autos.servicio.ComparacionesServicio;
 import com.example.autos.servicio.ValoracionesServicio;
-import com.example.autos.servicio.VehiculoServicio;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,8 +27,7 @@ public class CsvControlador {
     private ComparacionesServicio comparacionesServicio;
     @Autowired
     private ValoracionesServicio valoracionesServicio;
-    @Autowired
-    private VehiculoServicio vehiculoServicio;
+  
             
     
     @RequestMapping("/comparacionesCSV")
@@ -52,20 +46,21 @@ public class CsvControlador {
 
         // uses the Super CSV API to generate CSV data from the model data
         ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(),
-            CsvPreference.STANDARD_PREFERENCE);
+            CsvPreference.STANDARD_PREFERENCE); //CREA ARCHIVO
 
-           String[] header = { "modelo1","marca1","modelo2","marca2","ganadorModelo","ganadorMarca","fecha" };
+           String[] header = { "modelo1","marca1","modelo2","marca2","ganadorModelo","ganadorMarca","fecha" }; // CREO LAS COLUMNAS
             
-            csvWriter.writeHeader(header);
-            final CellProcessor[] processors = comparacionesServicio.getProcessors();
+            csvWriter.writeHeader(header); // COPIO LAS COLUMANS EN EL EL ARCHIVO
+            final CellProcessor[] processors = comparacionesServicio.getProcessors(); // DOY FORMATO A LAS COLUMNAS
             for (Comparaciones obj : comparacionesServicio.resultados()) {
-                
+                // CREO POR CADA FILA UNA CLASE PARA PONER EN EL ARCHIVO CVS
                 CvsComparaciones cvs= new CvsComparaciones(obj.getVehiculo1().getModelo(), obj.getVehiculo1().getMarca().getNombre(), obj.getVehiculo2().getModelo(),
                         obj.getVehiculo2().getMarca().getNombre(), obj.getVehiculoganador().getModelo(), obj.getVehiculoganador().getMarca().getNombre(),obj.getFechaComparacion().toString());
-                
+                // ESCRIBO EN EL CVS  LA CLASE , LA COLUMNA Y EL FORMATO
                 csvWriter.write(cvs,header,processors);
 
             }
+            // CUANDO TERMINO LO CIERRO
         csvWriter.close();
     }
      
