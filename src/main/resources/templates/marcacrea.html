@@ -40,6 +40,7 @@
                   
                     <br/><button type="submit" class="btn-block btn btn-success mb-4" th:text="${marcaEd} == null ? 'Guardar' :'Editar' " >Guardar</button>
                 </form>
+
                     <form th:if="${marcaEd} != null" action="/marcadelet" method="POST">
 
                   <input type= "hidden"  name="id"  th:value="${marcaEd} == null ? null : ${marcaEd.id}" />  
@@ -73,6 +74,7 @@
                           </tr>
                       </tbody>
                   </table>
+
               </div>
             </div>
           </div>
