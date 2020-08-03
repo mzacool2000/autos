@@ -147,8 +147,10 @@
                 <tbody>
                   <tr th:each="vehiculo:${vehiculos}" onclick="seleccionar(this,th:text="${vehiculo.id}")">
                       
-                      <td  class="text-white mt-0 center-block"><img th:if="${vehiculo.foto} != null " 
-                           th:src="@{/cargar/__${vehiculo.foto.id}__}" style="width: 80px">    
+                      <td  class="text-white mt-0 center-block">
+                          
+                      <img th:if="${vehiculo.foto} != null " th:src="@{/cargar/__${vehiculo.foto.id}__}" style="width: 80px">   
+                      
                       <a th:href="@{/editarvehiculo__${vehiculo.id}__}" th:text="Editar"></a></td>
                      
                       <td th:text="${vehiculo.modelo}" class="text-white mt-0"></td>

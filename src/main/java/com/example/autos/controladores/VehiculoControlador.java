@@ -36,19 +36,6 @@ public String agregavehiculo(ModelMap modelo){
     
 return "autonuevo.html";
 }
-@GetMapping("/editarvehiculo{id}")
-public String editarv(ModelMap modelo , @PathVariable String id){
-
-    Optional<Vehiculo> respuesta = vehiculoRepositorio.findById(id);
-    if (respuesta.isPresent()) {
-        System.out.println("tengo el vehiculo");
-        modelo.put("vehiculoEd", respuesta.get());
-        modelo.put("vehiculos",vehiculoRepositorio.findAll());
-
-        modelo.put("marcas", marcaRepositorio.findAll());
-
-        return "autonuevo.html";
-    }
 
     @GetMapping("/editarvehiculo{id}")
     public String editarv(ModelMap modelo, @PathVariable String id) {
@@ -65,7 +52,7 @@ public String editarv(ModelMap modelo , @PathVariable String id){
 
         return "/agregarvehiculo";
     }
-}
+
 
 
 @PostMapping("/adminvehiculo")
