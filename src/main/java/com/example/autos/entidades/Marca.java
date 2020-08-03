@@ -29,6 +29,11 @@ public class Marca {
     /**
      * @return the id
      */
+        
+        
+    public Marca() {
+    }
+
     public String getId() {
         return id;
     }
@@ -38,9 +43,6 @@ public class Marca {
         this.habilitado = habilitado;
     }
 
-    public Marca() {
-    }
-    
     /**
      * @param id the id to set
      */

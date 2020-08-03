@@ -23,7 +23,7 @@ public class loginControlador {
     public String registro(ModelMap modelo, @RequestParam String email, @RequestParam String clave) throws Error{
        
         try{
-            
+           
         }catch(Error e){
             modelo.put("Error", e.getMessage());
             modelo.put("email", email);

@@ -25,20 +25,20 @@
                                 </div>
                                 <p class="login-card-description">Recuperar Contraseña</p>
 
-                                                       <form action="/rpassw" method="post">
-                            
-                            <p th:if="${error != null}" th:text="${error}" style="color:red;"></p>
+                                <form action="/rpassw" method="post">
+
+                                    <p th:if="${error != null}" th:text="${error}" style="color:red;"></p>
 
 
-                             <input type="hidden" class="form-control" name="id" th:value="${usuario.id}" />                       
-                            <label><p class="text-white-75 font-weight-light mb-1">Nueva contraseña</p></label>
-                            <p> <input type="password" class="form-control" name="clave"/></p>
-                            <p> <input type="password" class="form-control" name="clave2" placeholder="Repita la Contraseña"/></p>
-                           
+                                    <input type="hidden" class="form-control" name="id" th:value="${usuario.id}" />                       
+                                    <label><p class="text-white-75 font-weight-light mb-1">Nueva contraseña</p></label>
+                                    <p> <input type="password" class="form-control" name="clave"/></p>
+                                    <p> <input type="password" class="form-control" name="clave2" placeholder="Repita la Contraseña"/></p>
 
-                            <br/><button type="submit" class="btn-block btn btn-success mb-4">Entrar</button>
 
-                        </form>
+                                    <br/><button type="submit" class="btn-block btn btn-success mb-4">Entrar</button>
+
+                                </form>
 
 
                             </div>
