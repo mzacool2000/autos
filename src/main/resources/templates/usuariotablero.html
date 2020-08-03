@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/login.css">
   <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name="viewport" content="width=device-width, initial-scale=4">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
 </head>
@@ -17,12 +19,15 @@
   <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
     <div class="container">
       <div class="card login-card">
+         
         <div class="row no-gutters">
+             
           <div class="col-md-5">
             <img src="assets/images/tablero.jpg" alt="login" class="login-card-img">
           </div>
           <div class="col-md-7">
             <div class="card-body">
+                 <a href="/logout" class="botoncerrar fa fa-close" style="font-size:28px;color:green" ></a>
               <div class="brand-wrapper">
                 <img src="assets/images/logo.png" alt="logo" class="logo">
               </div>
@@ -31,9 +36,14 @@
                     <input type="hidden" name="id" id="id"  th:value="${sesion.id}" class="form-control" />
                   <button name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="submit" >Editar Usuario</button>
                </form>
+               <div class="boton">
+                <a href="/login">
+                <button name="back" id="back" class="btn-block btn btn-success mb-4" style="position:relative; bottom: 230px; padding: 2px 10px">Inicio</button>
+                </a>
+                </div>
                
               <br> <a href="/agregarUsuario"> <i class='fas fa-user-plus' style='font-size:20px;color:green'> Agregar Usuario</i></a>
-               <br> <a href="/agregarmarca"> <i class='fa fa-industry' style='font-size:20px;color:green'> Agregar Marca</i></a>
+               <br> <a href="/agregarmarca"> <i class='fa fa-industry' style='font-size:20px;color:green'> Administrar Marcas</i></a>
               <br> <a href="/agregarvehiculo"> <i class='fas fa-car' style='font-size:20px;color:green'> Administrar Vehiculos</i></a>
               <br> <a href="/valoracionesCSV"> <i class='fas fa-file-export' style='font-size:20px;color:green'> Bajar Valoraciones</i></a>
                <br> <a href="/comparacionesCSV"> <i class='fas fa-file-export' style='font-size:20px;color:green'> Bajar Comparaciones</i></a>
@@ -122,5 +132,6 @@
 });
 
   </script>
+  
 </body>
 </html>

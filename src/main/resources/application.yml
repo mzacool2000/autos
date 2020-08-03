@@ -11,13 +11,13 @@ spring:
                     required: true
                     enable: true
                 quitwait: false    
-    username: bonos.artrans@gmail.com
-    password: ppkrqpwjxaesrfjf
+    username: 1996ignaciogimenez@gmail.com
+    password: rtzrvozomgkwrjpy
     
   datasource: 
     url: jdbc:mysql://localhost:3306/autos?allowPublicKeyRetrieval=true&useSSL=false&useTimezone=true&serverTimezone=GMT&characterEncoding=UTF-8
     username: root
-    password: root
+    password: ..$akala17
     driver-class-name: com.mysql.cj.jdbc.Driver 
   jpa:
     show-sql: true
