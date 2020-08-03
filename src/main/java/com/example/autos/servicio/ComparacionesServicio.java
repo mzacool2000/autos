@@ -11,6 +11,9 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.supercsv.cellprocessor.FmtDate;
+import org.supercsv.cellprocessor.constraint.NotNull;
+import org.supercsv.cellprocessor.ift.CellProcessor;
 
 @Service
 public class ComparacionesServicio {
@@ -52,4 +55,22 @@ public class ComparacionesServicio {
         
      return comparaciones;   
     }
+         public CellProcessor[] getProcessors() {
+        
+        final CellProcessor[] processors = new CellProcessor[] { 
+                new NotNull(), // modelo1
+                new NotNull(), // marca1
+                new NotNull(), // modelo2
+                new NotNull(), // marca2
+                new NotNull(), // ganadormarca
+                new NotNull(), // ganadormodelo
+                 new NotNull(), // fecha
+  
+        };
+        
+        return processors;
+    
+    
+    
+}
 }

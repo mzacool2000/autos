@@ -97,5 +97,16 @@ body {
   color:#ccc;
 }
 
+.botoncerrar{
 
+       line-height: 12px;
+       width: 18px;
+       font-size: 8pt;
+       font-family: tahoma;
+       margin-top: 1px;
+       margin-right: 25px;
+       position: absolute;
+       top: 0;
+       right: 0;
+}
 /*# sourceMappingURL=login.css.map */

@@ -15,17 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/")
 public class loginControlador {
     
-    @Autowired
-    private UsuarioServicio usuarioServicio;
+
     
-    
-    @GetMapping("/login")
-    public String login(@RequestParam (required = false) String error, ModelMap modelo) throws Error{
-        if(error != null){
-            modelo.put("error","Usuario o clave incorrectos.");
-        }
-        return "login.html";
-    }
+
     
     @PostMapping("/registro")
     public String registro(ModelMap modelo, @RequestParam String email, @RequestParam String clave) throws Error{
@@ -36,8 +28,6 @@ public class loginControlador {
             modelo.put("Error", e.getMessage());
             modelo.put("email", email);
         }
-        
-        
         
         return "login.html";
     }

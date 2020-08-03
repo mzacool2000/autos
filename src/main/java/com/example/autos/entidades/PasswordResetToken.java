@@ -11,19 +11,19 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 public class PasswordResetToken {
     
-    private static int EXPIRATION = 60 * 24;
+    private static int EXPIRATION = 60 * 24; //tiempo de duracion de la clase 24hs
     
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
-    private String token;
+    private String token; // token que se manda al mail
 
     @OneToOne
-    private Usuario usuario;
+    private Usuario usuario; // usuario asociado a este token
 
-    private Date expiryDate;
+    private Date expiryDate; // fecha de expiracion
     
       public PasswordResetToken(String token, Usuario usuario) {
         this.token = token;
