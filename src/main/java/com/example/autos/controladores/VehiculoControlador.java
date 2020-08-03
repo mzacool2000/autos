@@ -18,8 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class VehiculoControlador {
 
-
-
 @Autowired
 private MarcaRepositorio marcaRepositorio;
 @Autowired
@@ -38,6 +36,9 @@ public String agregavehiculo(ModelMap modelo){
 return "autonuevo.html";
 }
 
+
+
+
  
 
 
@@ -49,19 +50,26 @@ return "autonuevo.html";
             System.out.println("Tengo el vehiculo");
             modelo.put("vehiculoEd", respuesta.get());
             modelo.put("vehiculos", vehiculoRepositorio.findAll());
+
             modelo.put("marcas", marcaRepositorio.findAll());
+
             System.out.println("Le mande todo al modelo");
+
+
+
             return "autonuevo.html";
         }
-
-        return "/agregarvehiculo";
+        return null;
     }
 
+    
 
     @PostMapping("/adminvehiculo")
     private String adminvehiculo(ModelMap model, @RequestParam(required = false) String id, @RequestParam String modelo, @RequestParam String marcaid,
             @RequestParam String motor, @RequestParam int cilindrada, @RequestParam double emision, @RequestParam double consumoRuta, @RequestParam double consumoCiudad,
             @RequestParam double consumoMixto, @RequestParam TipoCombustible combustible, @RequestParam(required = false) String habilitado, @RequestParam(required = false) MultipartFile archivo) {
+
+
 
         try {
             boolean chk = !(habilitado == null);
@@ -70,6 +78,9 @@ return "autonuevo.html";
                 vehiculoServicio.AgregarVehiculo(archivo, marcaid, modelo, motor, combustible, cilindrada, emision, consumoRuta, consumoCiudad, consumoMixto, chk);
             } else {
                 if (archivo != null) {
+
+                    System.out.println("RECIBI LA IMAGEN!!!!!!!!!!!!!!");
+
                 }
                 vehiculoServicio.modificar(archivo, id, marcaid, modelo, motor, combustible, cilindrada, emision, consumoRuta, consumoCiudad, consumoMixto, chk);
                 return "redirect:/agregarvehiculo";
@@ -87,12 +98,20 @@ return "autonuevo.html";
         try {
             vehiculoServicio.eliminar(id);
             modelo.put("titulo", "Eliminado");
+
             modelo.put("mensaje", "El vehiculo fue eliminado con exito");
+
+            modelo.put("mensaje", "El vehiculo fue eliminado con extio");
+
 
         } catch (Exception e) {
             vehiculoServicio.eliminar(id);
             modelo.put("error", "oke");
+
             modelo.put("mensaje", "El vehiculo fue eliminado con exito");
+
+            modelo.put("mensaje", "El vehiculo fue eliminado con extio");
+
             return "exito,html";
         }
 
