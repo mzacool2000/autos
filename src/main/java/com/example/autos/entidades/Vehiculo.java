@@ -31,6 +31,7 @@ public class Vehiculo {
     private Double consumoUrbano;
     private Double consumoMixto;
     private Boolean habilitado;
+    
     @OneToOne
     private Foto foto;
 

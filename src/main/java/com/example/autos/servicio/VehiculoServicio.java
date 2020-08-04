@@ -53,11 +53,11 @@ public class VehiculoServicio {
     @Transactional
     public void modificar(MultipartFile archivo, String id, String idMarca, String modelo, String motor, TipoCombustible tipo, Integer cilindrada, Double emision, Double consumoRuta, Double consumoUrbano, Double consumoMixto, boolean habilitado) throws Error {
         if (id.isEmpty() || id == null) {
-           throw new Error("El Id del vehiculo no puede ser nulo."); 
+           throw new Error("El Id del vehiculo no puede ser nulo."); //patea al controlador si el Id viene null
         }
-        validar(modelo, idMarca, motor, tipo, cilindrada, emision, consumoRuta, consumoUrbano, consumoMixto);
+        validar(modelo, idMarca, motor, tipo, cilindrada, emision, consumoRuta, consumoUrbano, consumoMixto);//si alguno de los datos viene nulo 
 
-        Optional<Vehiculo> respuestaV = vehiculoRepositorio.findById(id);
+        Optional<Vehiculo> respuestaV = vehiculoRepositorio.findById(id);//el Id de el controlador tiene un auto en Bs de Datos
 
         Optional<Marca> respuestaM = marcaRepositorio.findById(idMarca);
         if (respuestaV.isPresent()) {
@@ -78,7 +78,7 @@ public class VehiculoServicio {
                 vehiculo.setTipo(tipo);
                 vehiculo.setHabilitado(habilitado);
                 vehiculo.setFoto(fotoServicio.guardar(archivo));
-                vehiculoRepositorio.save(vehiculo);
+                vehiculoRepositorio.save(vehiculo);//guarda
             } else {
                 throw new Error("No se ha encotrado la marca");
             }

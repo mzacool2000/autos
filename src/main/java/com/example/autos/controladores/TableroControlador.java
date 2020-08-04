@@ -51,7 +51,7 @@ public class TableroControlador {
        public String agregarM(ModelMap modelo, @RequestParam String nombre, @RequestParam String habilitado){
        Boolean chek = false;
            if (habilitado.equals("on")) {
-               chek = true;
+               chek = true; //se fija si esta tildado el check box 
            }
            System.out.println(habilitado);
            

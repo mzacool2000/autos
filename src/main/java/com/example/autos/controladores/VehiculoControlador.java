@@ -28,11 +28,11 @@ public class VehiculoControlador {
     @GetMapping("/agregarvehiculo")
     public String agregavehiculo(ModelMap modelo) {
 
-        modelo.put("vehiculos", vehiculoRepositorio.findAll());
+        modelo.put("vehiculos", vehiculoRepositorio.findAll()); // le mando al Thymleaf todas las marccas y los vehiculos
 
         modelo.put("marcas", marcaRepositorio.findAll());
 
-        return "autonuevo.html";
+        return "autonuevo.html"; //hace que el usuario vea los datos de vehiculos y marcas
     }
 
     @GetMapping("/editarvehiculo{id}")
@@ -42,7 +42,7 @@ public class VehiculoControlador {
         if (respuesta.isPresent()) {
             System.out.println("tengo el vehiculo");
             modelo.put("vehiculoEd", respuesta.get());
-            modelo.put("vehiculos", vehiculoRepositorio.findAll());
+            modelo.put("vehiculos", vehiculoRepositorio.findAll()); //le enivio al Thymleaf los datos del vhicullos que se quiere modificar 
 
             modelo.put("marcas", marcaRepositorio.findAll());
 
@@ -69,7 +69,7 @@ public class VehiculoControlador {
                 return "redirect:/agregarvehiculo";
             }
         } catch (Exception e) {
-            model.put("error", e.getMessage());
+            model.put("error", e.getMessage()); // si algo sale mal todo vuelve a la pagina anterior
             return "redirect:/agregarvehiculo";
         }
         return "redirect:/agregarvehiculo";

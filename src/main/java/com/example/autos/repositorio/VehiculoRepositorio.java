@@ -13,4 +13,5 @@ public interface VehiculoRepositorio  extends JpaRepository<Vehiculo, String> {
     
     @Query("SELECT c FROM Vehiculo c Where c.id = :id")
     public Vehiculo BuscarVehiculo(@Param("id") String id);
+    
 }

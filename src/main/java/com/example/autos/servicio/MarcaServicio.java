@@ -32,7 +32,7 @@ public class MarcaServicio {
     public void modificar(String idmarca, String nombre , Boolean habilitado){
     
         if (idmarca.isEmpty() || nombre.isEmpty() || habilitado == null) {
-            throw new Error("los campos no pueden estar vacios");
+            throw new Error("los campos no pueden estar vacios");//tambein esta la baja de la marca
         }
        
         Optional<Marca> respuesta = marcaRepositorio.findById(idmarca);
