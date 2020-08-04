@@ -33,39 +33,39 @@ private UsuarioRepositorio usuarioRepositorio;
         Optional<PasswordResetToken> respuesta = passwordResetTokenRepositorio.findById(token);
 
           if (respuesta.isPresent()) {
-            final  PasswordResetToken passToken = respuesta.get();
-            return !isTokenFound(passToken) ? "invalidToken"
-            : isTokenExpired(passToken) ? "expired"
-            : null;
+            final  PasswordResetToken passToken = respuesta.get(); //ifternario 
+            return !isTokenFound(passToken) ? "invalidToken" //devuelve esta el token? 
+            : isTokenExpired(passToken) ? "expired" // es valido el token
+            : null; // si todo ok null
         }
     
  return null;
 }
 
         @Transactional
-    public Usuario buscarToken(String token) {
+    public Usuario buscarToken(String token) { //busca el token que le madne al usuario por mail y me devuelve el usuario
         
-        System.out.println("llegue al empleado");
+       
          Usuario usuario = passwordResetTokenRepositorio.buscarEmpleadoPorTokenl(token);
          if (usuario == null) {
-             System.out.println("no se encontro empleado");
+           
              return null;
         }
-         System.out.println("encontre el empleado");
-        return usuario;
+       
+        return usuario; // como lo encontre lo devuelvo
     }
 
     
-private boolean isTokenFound(PasswordResetToken passToken) {
+private boolean isTokenFound(PasswordResetToken passToken) { // si el token no es null
     return passToken != null;
 }
  
-private boolean isTokenExpired(PasswordResetToken passToken) {
+private boolean isTokenExpired(PasswordResetToken passToken) { // si no expiro
     final Calendar cal = Calendar.getInstance();
     return passToken.getExpiryDate().before(cal.getTime());
 }
     
-    public void changeUserPassword(Usuario usuario, String password) {
+    public void changeUserPassword(Usuario usuario, String password) { // cambia la contraseña
      
          String encriptada = new BCryptPasswordEncoder().encode(password);
         usuario.setClave(encriptada);
@@ -74,7 +74,7 @@ private boolean isTokenExpired(PasswordResetToken passToken) {
 }
     
     
-    public void createPasswordResetTokenForUser(Usuario usuario, String token) {
+    public void createPasswordResetTokenForUser(Usuario usuario, String token) { // crea un token para mandar al mail
     PasswordResetToken myToken = new PasswordResetToken(token, usuario);
     passwordResetTokenRepositorio.save(myToken);
 }

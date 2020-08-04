@@ -39,6 +39,10 @@
                   
                     <br/><button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
+                   <form th:if="${marcaEd} != null" action="/marcadelet" method="POST">
+
+                  <input type= "hidden"  name="id"  th:value="${marcaEd} == null ? null : ${marcaEd.id}" />  
+                  <button name="Registrarse" id="Registrarse" class= "btn-block btn btn-success mb-4" type="submit" >Eliminar</button>
               </div>
             </div>
           </div>

@@ -43,12 +43,16 @@
                 <div class="collapse navbar-collapse" id="example" >
                     <ul class="nav navbar-nav navbar-right">
                         <li>
+
                             <a href="#valora">
+
                             <i >VALORAR AUTO</i>
                             </a>
                         </li>
                         <li>
+
                             <a href="#compara">
+
                             <i >COMPARAR AUTO</i>
                             
                             </a>
@@ -137,8 +141,10 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
+
                             <div class="description" id="valora">
                                 <h4 class="header-text"  th:text="${autov} == null ? 'Valora tu auto' : 'Caracteristicas'" ></h4>
+
                                 <p th:text="${autov} == null ? 
                                    'En esta seccion podras buscar informacion sobre tu auto y cuanto contamina' : 
                                    'Recuerda que tu opinion es importante para nosotros no olvides dejarla'"> </p>
@@ -218,8 +224,10 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
+
                             <div class="description" id="compara">
                                 <h4 class="header-text" th:text="${autoc1} == null ? 'Comparar vehiculos' : 'Caracteristicas'"></h4>
+
                                 <p th:text="${autoc1} == null ? 'En esta seccion podras comparar entre dos modelos de vehiculos' 
                                    : 'Recuerda votar tu preferido es importante para nosotros'" > </p>
                                 
