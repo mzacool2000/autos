@@ -1,18 +1,22 @@
 
 package com.example.autos.controladores;
 
+import com.example.autos.entidades.Marca;
+import com.example.autos.repositorio.MarcaRepositorio;
 import com.example.autos.repositorio.UsuarioRepositorio;
 import com.example.autos.servicio.MarcaServicio;
-import com.example.autos.servicio.UsuarioServicio;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 
 @Controller
 public class TableroControlador {
@@ -21,6 +25,8 @@ public class TableroControlador {
     private MarcaServicio marcaServicio;
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
+    @Autowired
+    private MarcaRepositorio marcaRepositorio;
     
      @GetMapping("/tablero")
      public String tablero(ModelMap modelo){
@@ -42,27 +48,46 @@ public class TableroControlador {
     
     
     @RequestMapping("/agregarmarca")
-    public String agregarMarca(){
+    public String agregarMarca(ModelMap modelo){
             
+        modelo.put("marcas", marcaRepositorio.findAll());
+        
         return "marcacrea.html";
         }
     
        @PostMapping("/agregarM")
+<<<<<<< HEAD
        public String agregarM(ModelMap modelo, @RequestParam String nombre, @RequestParam String habilitado){
        Boolean chek = false;
            if (habilitado.equals("on")) {
                chek = true; //se fija si esta tildado el check box 
            }
            System.out.println(habilitado);
+=======
+       public String agregarM(ModelMap modelo,@RequestParam(required = false) String id, @RequestParam String nombre,
+                              @RequestParam(required = false) String habilitado){
+           System.out.println("id es " +id);
+           System.out.println("nombre es " + nombre);
+           System.out.println("habilitado es" +habilitado);
+           boolean chk = !(habilitado == null);
+           System.out.println(chk);
+>>>>>>> 27ae095a99d1f9c21274fe016326e0977cc50d8c
            
-           
-        marcaServicio.agregarMarca(nombre, chek);
-        
-        modelo.put("titulo", "Felicidades");
-        modelo.put("mensaje", "La marca "+nombre+" fue agregada correctamente");
-       
-       return "exito.html";
-       }
+        if ( id == null || id.isEmpty()) {
+            System.out.println("estoy agregando");
+            marcaServicio.agregarMarca(nombre, chk);
+            modelo.put("titulo", "Felicidades");
+            modelo.put("mensaje", "La marca " + nombre + " fue agregada correctamente");
+            return "exito.html";
+
+        } else {
+            System.out.println("estoy editando");
+            marcaServicio.modificar(id, nombre, chk);
+            modelo.put("titulo", "Felicidades");
+            modelo.put("mensaje", "La marca " + nombre + " fue modificada correctamente");
+            return "exito.html";
+        }
+    }
        
        @GetMapping("/agregarUsuario")
        public String agregaruser(){
@@ -71,4 +96,35 @@ public class TableroControlador {
        }
        
        
+       
+       
+       @GetMapping("/editarmarca{id}")
+public String editarm(ModelMap modelo , @PathVariable String id){
+
+    Optional<Marca> respuesta = marcaRepositorio.findById(id);
+    if (respuesta.isPresent()) {
+        modelo.put("marcas", marcaRepositorio.findAll());
+        modelo.put("marcaEd", respuesta.get());
+
+    return "marcacrea.html";
+    }
+  return "redirect:/agregarM";
+}
+@PostMapping("/marcadelet")
+public String autodelet(@RequestParam String id, ModelMap modelo){
+
+    try {
+        marcaServicio.eliminar(id);
+        modelo.put("titulo", "Eliminada");
+        modelo.put("mensaje", "La Marca fue eliminada con extio");
+        
+    } catch (Exception e) {
+         marcaServicio.eliminar(id);
+        modelo.put("error", "oke");
+        modelo.put("mensaje", "La marca fue eliminada con extio");
+        return "exito,html";
+    }
+    
+return "exito.html";    
+}
 }

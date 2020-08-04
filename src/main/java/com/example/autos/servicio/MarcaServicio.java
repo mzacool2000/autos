@@ -13,12 +13,11 @@ public class MarcaServicio {
     
     @Autowired
     private MarcaRepositorio marcaRepositorio;
+    
     @Transactional
     public void agregarMarca(String nombre, Boolean habilitado)throws Error{
     
-        if (nombre.isEmpty() || nombre == null) {
-            throw new Error("El nombre de la marca no debe estar vacio");
-        }
+        
         
         Marca marca = new Marca();
         
@@ -31,21 +30,30 @@ public class MarcaServicio {
     @Transactional
     public void modificar(String idmarca, String nombre , Boolean habilitado){
     
+<<<<<<< HEAD
         if (idmarca.isEmpty() || nombre.isEmpty() || habilitado == null) {
             throw new Error("los campos no pueden estar vacios");//tambein esta la baja de la marca
         }
+=======
+      
+>>>>>>> 27ae095a99d1f9c21274fe016326e0977cc50d8c
        
         Optional<Marca> respuesta = marcaRepositorio.findById(idmarca);
         if (respuesta.isPresent()) {
             
             Marca marca = respuesta.get();
-            
             marca.setNombre(nombre);
             marca.setHabilitado(habilitado);
             
             marcaRepositorio.save(marca);
             
         }
+         
+    }
+    @Transactional
+    public void eliminar(String id){
+    
+      marcaRepositorio.deleteById(id);
     
     }
     
