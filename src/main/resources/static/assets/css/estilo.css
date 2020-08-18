@@ -91,4 +91,27 @@
 	background-image: url('assets/imges/1.jpg');
 	background-size: cover;
 }*/
+.boton{
+    animation: bounce1 .5s alternate infinite ease-in;
+}
+.text1{
+    animation: bounce2 .3s alternate infinite ease-in;
+}
+@keyframes bounce1{
+    0%{
+        transform: translateY(0%);             
+    }
+    100%{
+        transform: translateY(-3000%);             
+    }
+
+}
+@keyframes bounce2{
+    0%{
+        transform: translateX(0%);             
+    }
+    100%{
+        transform: translateX(100%);             
+    }
+}
 
