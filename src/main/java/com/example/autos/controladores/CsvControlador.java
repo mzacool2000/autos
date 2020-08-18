@@ -33,22 +33,22 @@ public class CsvControlador {
     @RequestMapping("/comparacionesCSV")
      public void downloadCSV(HttpServletResponse response) throws IOException {
 
-        String csvFileName = "comparaciones.csv";
+        String csvFileName = "comparaciones.csv"; //le doy nombre al archivo
 
-        response.setContentType("text/csv");
+        response.setContentType("text/csv"); //le doy el tipo del archivo
 
         // creates mock data
-        String headerKey = "Content-Disposition";
+        String headerKey = "Content-Disposition"; //creamos el archivo
         String headerValue = String.format("attachment; filename=\"%s\"",
             csvFileName);
         response.setHeader(headerKey, headerValue);
 
 
         // uses the Super CSV API to generate CSV data from the model data
-        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(),
+        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), //crea la clase del archivo, 
             CsvPreference.STANDARD_PREFERENCE); //CREA ARCHIVO
 
-           String[] header = { "modelo1","marca1","modelo2","marca2","ganadorModelo","ganadorMarca","fecha" }; // CREO LAS COLUMNAS
+           String[] header = { "modelo1","marca1","modelo2","marca2","ganadorModelo","ganadorMarca","fecha" }; // CREO LAS COLUMNAS, tiene que coincidir con el nombre
             
             csvWriter.writeHeader(header); // COPIO LAS COLUMANS EN EL EL ARCHIVO
             final CellProcessor[] processors = comparacionesServicio.getProcessors(); // DOY FORMATO A LAS COLUMNAS
